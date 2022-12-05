@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://items/barrel.png" type="Texture" id=1]
+[ext_resource path="res://effects/Shadow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://items/Barrel.gd" type="Script" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.0
+
+[sub_resource type="CanvasItemMaterial" id=3]
+light_mode = 1
+
+[node name="Barrel" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, -8 )
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, -4 )
+shape = SubResource( 2 )
+
+[node name="Shadow" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -2 )
+scale = Vector2( 0.4, 0.2 )
+
+[node name="OpenMenu" type="PanelContainer" parent="."]
+visible = false
+material = SubResource( 3 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.5
+margin_top = -41.0
+margin_right = 26.5
+margin_bottom = -21.0
+
+[node name="Open" type="ToolButton" parent="OpenMenu"]
+use_parent_material = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 49.0
+margin_bottom = 16.0
+text = "Open"
+
+[node name="BubbleTail" type="Polygon2D" parent="OpenMenu"]
+position = Vector2( 27, 20 )
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( -4, 0, 0, 4, 4, 0 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="pressed" from="OpenMenu/Open" to="." method="_on_Open_pressed"]

@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://levels/Level.gd" type="Script" id=1]
+[ext_resource path="res://characters/OverworldPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tileset/fg_tileset.tres" type="TileSet" id=4]
+[ext_resource path="res://tileset/bg_tileset.tres" type="TileSet" id=5]
+[ext_resource path="res://levels/RoomTransition.tscn" type="PackedScene" id=7]
+
+[node name="Level" type="YSort"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bg" type="TileMap" parent="."]
+z_index = -10
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 12, 12 )
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Fg" type="TileMap" parent="."]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 12, 12 )
+cell_tile_origin = 2
+cell_y_sort = true
+format = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 256
+limit_bottom = 144
+editor_draw_limits = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="RoomTransition" parent="." instance=ExtResource( 7 )]
+position = Vector2( 300, 72 )
+destination = "res://levels/sewers/Level-Sewers1.tscn"
