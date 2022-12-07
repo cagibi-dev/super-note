@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 [node name="Shadow" parent="." instance=ExtResource( 3 )]
 show_behind_parent = true
 position = Vector2( 0, -1 )
-scale = Vector2( 0.4, 0.2 )
+scale = Vector2( 0.4, 0.4 )
 
 [node name="Vibe" type="TextureProgress" parent="."]
 material = ExtResource( 1 )

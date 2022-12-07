@@ -1,0 +1,14 @@
+extends Area2D
+
+
+onready var menu_container_node := $MenuTail
+onready var actions_node := $MenuTail/Menu/Actions
+
+
+func _on_body_entered(_body):
+	menu_container_node.show()
+	actions_node.get_child(0).grab_focus()
+
+
+func _on_body_exited(_body):
+	menu_container_node.hide()

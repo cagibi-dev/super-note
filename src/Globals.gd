@@ -16,7 +16,7 @@ var party := [
 	preload("res://characters/EncounterHero.tscn").instance(),
 	preload("res://characters/EncounterHero.tscn").instance(),
 ]
-var inventory := ["CoolPotion", "DoesNothing", "CoolPotion"]
+var inventory := []
 
 # stuff about encounters apart from our heroes
 var encounter_data := {
@@ -52,3 +52,15 @@ func goto_room(room_name: String):
 			var player: Node2D = get_tree().get_nodes_in_group("player")[0]
 			player.global_position = transition.global_position - previous_player_offset * 1.5
 			break
+
+
+func play_music(music: AudioStream):
+	var music_node: AudioStreamPlayer = $Music
+	if music:
+		if music_node.stream != music:
+			music_node.stop()
+			music_node.stream = music
+			music_node.play()
+	else:
+		music_node.stop()
+		music_node.stream = null

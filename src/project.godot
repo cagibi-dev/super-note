@@ -26,8 +26,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Super Note Turn-based"
-run/main_scene="res://levels/sewers/Level-Sewers1.tscn"
+config/name="Super Note and the Golden Record"
+config/description="Overcome your enemies by playing music in this small RPG prototype!"
+run/main_scene="res://levels/LevelSewers.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -74,6 +75,10 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 

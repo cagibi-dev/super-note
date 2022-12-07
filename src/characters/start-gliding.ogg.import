@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/start-gliding.ogg-29daea9f2dd5724985587e840257203a.oggstr"
+
+[deps]
+
+source_file="res://characters/start-gliding.ogg"
+dest_files=[ "res://.import/start-gliding.ogg-29daea9f2dd5724985587e840257203a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

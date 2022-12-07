@@ -2,9 +2,12 @@ extends "res://characters/OverworldCharacter.gd"
 
 
 onready var anim_node: AnimationPlayer = $Anim
+export (bool) var is_playable := true
 
 
 func handle_input():
+	if not is_playable:
+		return
 	input_vec.x = Input.get_axis("ui_left", "ui_right")
 	input_vec.y = Input.get_axis("ui_up", "ui_down")
 	if input_vec.length_squared() > 1.0:

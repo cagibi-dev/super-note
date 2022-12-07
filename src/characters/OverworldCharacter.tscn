@@ -21,4 +21,4 @@ region_rect = Rect2( 0, 0, 24, 24 )
 
 [node name="Shadow" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -1 )
-scale = Vector2( 0.4, 0.2 )
+scale = Vector2( 0.4, 0.4 )

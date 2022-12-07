@@ -6,6 +6,8 @@ export (bool) var is_enemys_turn := false
 
 
 func _ready():
+	Globals.play_music(null)
+	
 	for hero_index in range(len(Globals.party)):
 		var hero: EncounterCharacter = Globals.party[hero_index]
 		hero.position = $HeroPositions.get_child(hero_index).position
@@ -42,8 +44,8 @@ func next_character():
 	yield(get_tree(), "idle_frame")
 
 	if is_encounter_over():
-		yield(get_tree().create_timer(1.0), "timeout")
-		get_tree().change_scene("res://levels/sewers/Level-Sewers1.tscn")
+		yield(get_tree().create_timer(2.0), "timeout")
+		_on_Leave_pressed()
 		return
 
 	actor_index += 1
@@ -82,4 +84,5 @@ func is_encounter_over():
 
 
 func _on_Leave_pressed():
+	#Globals.previous_player_offset = Vector2(40, 0)
 	Globals.goto_room(Globals.previous_room)
