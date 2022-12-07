@@ -27,6 +27,7 @@ position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 
 [node name="MenuTail" type="Polygon2D" parent="."]
+visible = false
 use_parent_material = true
 position = Vector2( 0, -24 )
 color = Color( 0, 0, 0, 1 )

@@ -8,6 +8,7 @@
 [node name="Barrel" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
 item = "CoolPotion"
+credits = 0
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )

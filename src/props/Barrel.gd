@@ -2,6 +2,7 @@ extends "res://props/Interactable.gd"
 
 
 export (String) var item := "CoolPotion"
+export (int) var credits := 0
 
 
 func _on_1_pressed():
@@ -14,6 +15,10 @@ func _on_1_pressed():
 			print("you got " + item)
 			Globals.inventory.append(item)
 			item = ""
+		if credits > 0:
+			print("you got credits")
+			# TODO globals
+			credits = 0
 		actions_node.get_child(0).text = "Close"
 	else:
 		$Sprite.frame = 0
