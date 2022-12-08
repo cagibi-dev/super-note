@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fight_icon.png-88ad5887cbbdc7320b42a1632489c726.stex"
+path="res://.import/talk.png-99f057f77645251c1be3b42d3cbef27c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://menu/fight_icon.png"
-dest_files=[ "res://.import/fight_icon.png-88ad5887cbbdc7320b42a1632489c726.stex" ]
+source_file="res://menu/icons/talk.png"
+dest_files=[ "res://.import/talk.png-99f057f77645251c1be3b42d3cbef27c.stex" ]
 
 [params]
 

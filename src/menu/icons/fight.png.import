@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jam_icon.png-eeb24a5413ca7796cfe0a87944c04589.stex"
+path="res://.import/fight.png-366f41d4817f5b6911172d0ee6ad983d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://menu/jam_icon.png"
-dest_files=[ "res://.import/jam_icon.png-eeb24a5413ca7796cfe0a87944c04589.stex" ]
+source_file="res://menu/icons/fight.png"
+dest_files=[ "res://.import/fight.png-366f41d4817f5b6911172d0ee6ad983d.stex" ]
 
 [params]
 

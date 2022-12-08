@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vibe_icons.png-59c496970534b8f39a13862e1b47f9dc.stex"
+path="res://.import/run.png-c6a2457c7244ef978673b13854707ce9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://menu/vibe_icons.png"
-dest_files=[ "res://.import/vibe_icons.png-59c496970534b8f39a13862e1b47f9dc.stex" ]
+source_file="res://menu/icons/run.png"
+dest_files=[ "res://.import/run.png-c6a2457c7244ef978673b13854707ce9.stex" ]
 
 [params]
 

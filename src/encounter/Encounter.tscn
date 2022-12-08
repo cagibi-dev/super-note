@@ -4,7 +4,7 @@
 [ext_resource path="res://tileset/fg_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://tileset/bg_tileset.tres" type="TileSet" id=4]
 [ext_resource path="res://menu/fonts/normal_font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://menu/conclude_icon.png" type="Texture" id=9]
+[ext_resource path="res://menu/icons/run.png" type="Texture" id=9]
 [ext_resource path="res://effects/light_texture.tres" type="Texture" id=10]
 
 [sub_resource type="Gradient" id=1]

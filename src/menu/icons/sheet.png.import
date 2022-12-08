@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/talk_icon.png-e1f7a32e763cec1b4ae56f4e0f2ccc40.stex"
+path="res://.import/sheet.png-5d179fb28b6d16bd35fedf7d1613ecfe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://menu/talk_icon.png"
-dest_files=[ "res://.import/talk_icon.png-e1f7a32e763cec1b4ae56f4e0f2ccc40.stex" ]
+source_file="res://menu/icons/sheet.png"
+dest_files=[ "res://.import/sheet.png-5d179fb28b6d16bd35fedf7d1613ecfe.stex" ]
 
 [params]
 

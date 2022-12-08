@@ -3,6 +3,7 @@ extends KinematicBody2D
 
 var velocity := Vector2()
 export (Vector2) var input_vec := Vector2()
+export (float) var max_speed := 72.0
 
 
 func handle_input():
@@ -12,7 +13,7 @@ func handle_input():
 func _physics_process(delta: float):
 	handle_input()
 
-	velocity = lerp(velocity, 64 * input_vec, 10 * delta)
+	velocity = lerp(velocity, max_speed * input_vec, 12 * delta)
 
 	if input_vec.x > 0:
 		$Sprite.scale.x = 1
