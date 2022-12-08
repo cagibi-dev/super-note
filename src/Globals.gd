@@ -17,6 +17,7 @@ var party := [
 	preload("res://characters/EncounterHero.tscn").instance(),
 ]
 var inventory := []
+var money := 0 setget set_money
 
 # stuff about encounters apart from our heroes
 var encounter_data := {
@@ -32,9 +33,16 @@ var encounter_data := {
 	"scene": "sewers",
 }
 
+onready var dialog_box := $DialogBox
+
 
 func _ready():
 	OS.window_size *= 4
+
+
+func set_money(new_money: int):
+	money = new_money
+	$Money.text = str(money)
 
 
 func goto_room(room_name: String):

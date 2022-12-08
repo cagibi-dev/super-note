@@ -43,3 +43,8 @@ func _on_CharTimer_timeout():
 		$Line2D.show()
 	else:
 		$CharTimer.start()
+
+
+func _on_DialogBox_visibility_changed():
+	if visible:
+		$HBoxContainer/Next.grab_focus()
