@@ -1,22 +1,21 @@
 extends PanelContainer
+class_name DialogSystem
 
 signal dialog_ended
 
-# Each line is a Dict with keys: name?, message, portrait?
+# Each line is a Dict with keys: name?, text, portrait?
 # all of them String values
 export (Array) var lines := []
 export (int) var character_step := 2
 
 onready var msg_node: Label = $HBoxContainer/Message
-
-
-func start_dialog(new_lines: Array):
-	show()
-	lines = new_lines
-	start_line()
+onready var name_node: Label = $Node2D/Name
+onready var portrait_node: TextureRect = $HBoxContainer/Portrait
+onready var talk_sound: AudioStreamPlayer = $Bleeps/SN
 
 
 func portrait(face_name: String) -> Vector2:
+	# converts portrait string to cell vector.
 	match face_name:
 		"sn_smile": return Vector2(0, 0)
 		"sn_squint": return Vector2(1, 0)
@@ -25,29 +24,40 @@ func portrait(face_name: String) -> Vector2:
 	return Vector2(0, 0)
 
 
+func start_dialog(new_lines: Array):
+	show()
+	lines = new_lines
+	start_line()
+
+
 func start_line():
 	var new_line: Dictionary = lines[0]
-	msg_node.text = new_line["message"]
+	msg_node.text = new_line["text"]
+
 	if new_line.has("name"):
-		$Node2D/Name.text = new_line["name"]
+		name_node.text = new_line["name"]
+		talk_sound = $Bleeps/SN
 	else:
-		$Node2D/Name.text = ""
+		name_node.text = ""
+		talk_sound = $Bleeps/FlavorText
+
 	if new_line.has("portrait"):
-		$HBoxContainer/Portrait.show()
-		$HBoxContainer/Portrait.texture.region.position.x = 2 + 32 * portrait(new_line["portrait"]).x
-		$HBoxContainer/Portrait.texture.region.position.y = 2 + 32 * portrait(new_line["portrait"]).y
+		var cell := portrait(new_line["portrait"])
+		portrait_node.show()
+		portrait_node.texture.region.position.x = 2 + 32 * cell.x
+		portrait_node.texture.region.position.y = 2 + 32 * cell.y
 	else:
-		$HBoxContainer/Portrait.hide()
+		portrait_node.hide()
 	msg_node.percent_visible = 0
-	$Line2D.hide()
+	$ArrowNext.hide()
 	$CharTimer.start()
 
 
-func _on_Next_pressed():
+func _on_next_pressed():
 	if msg_node.percent_visible < 1:
 		# just skip text
 		msg_node.percent_visible = 1
-		$Line2D.show()
+		$ArrowNext.show()
 		$CharTimer.stop()
 		return
 
@@ -64,12 +74,13 @@ func _on_Next_pressed():
 
 func _on_CharTimer_timeout():
 	msg_node.visible_characters += character_step
-	$Talk.play()
+	talk_sound.play()
 	if msg_node.percent_visible >= 1:
-		$Line2D.show()
+		$ArrowNext.show()
 		$CharTimer.stop()
 
 
 func _on_DialogBox_visibility_changed():
+	$Next/Touch.visible = visible
 	if visible:
-		$HBoxContainer/Next.grab_focus()
+		$Next/Touch.grab_focus()

@@ -2,55 +2,51 @@ extends "res://levels/Level.gd"
 
 
 func _on_BarrelWithInstrument_first_opened():
-	$Player.input_vec = Vector2()
-	$Player.is_playable = false
+	player_node.target_position = player_node.position
+	player_node.is_playable = false
 
 	yield(get_tree().create_timer(0.5), "timeout")
-	Globals.dialog_box.start_dialog([
-		{ "name": "Super Note", "portrait": "sn_smile", "message": "Finally, instruments. I can \"talk\" now.",  },
-		{ "name": "Super Note", "portrait": "sn_squint", "message": "They're a bit old though. I'd say they're about..." },
-		{ "name": "Super Note", "portrait": "sn_shock", "message": "200 years old!?" },
-		{ "name": "Super Note", "portrait": "sn_worry", "message": "Is that really how long I was deactivated...?" },
+	Globals.dialog_system.start_dialog([
+		{ "text": "With instruments, Super Note is able to communicate!", },
+		{ "name": "Super Note", "portrait": "sn_smile", "text": "Ah, wood blocks. I can sort of talk now.",  },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "They're a bit old though. I'd say they're about..." },
+		{ "name": "Super Note", "portrait": "sn_shock", "text": "200 years old!?" },
+		{ "name": "Super Note", "portrait": "sn_worry", "text": "Is that really how long I was deactivated...?" },
 		])
-	yield(Globals.dialog_box, "dialog_ended")
-	$Player.is_playable = true
+	yield(Globals.dialog_system, "dialog_ended")
+	Globals.play_music(preload("res://music/sewers.ogg"))
+	player_node.is_playable = true
 
 
 func _on_WindowScene_body_entered(_body):
 	$WindowScene.set_deferred("monitoring", false)
-	$Player.input_vec = Vector2()
-	$Player.is_playable = false
-	yield(get_tree().create_timer(0.5), "timeout")
-	$Player.input_vec = Vector2(0.5, -0.5)
-	yield(get_tree().create_timer(1.0), "timeout")
-	$Player.input_vec = Vector2()
-	yield(get_tree().create_timer(0.6), "timeout")
+	player_node.is_playable = false
+	player_node.target_position = $WindowScene.position
+	yield(get_tree().create_timer(1.5), "timeout")
 
 
-	Globals.dialog_box.start_dialog([
-		{ "name": "Super Note", "portrait": "sn_smile", "message": "Ahh, the light of Guirjule's Star.",  },
-		{ "name": "Super Note", "portrait": "sn_squint", "message": "It's brighter than what I remember, though." },
-		{ "name": "Super Note", "portrait": "sn_worry", "message": "From what little I can recall..." },
-		{ "name": "Super Note", "portrait": "sn_worry", "message": "There's a supercomputer inside our sun." },
-		{ "name": "Super Note", "portrait": "sn_squint", "message": "Maybe it's currently overheating... I hope not." },
+	Globals.dialog_system.start_dialog([
+		{ "name": "Super Note", "portrait": "sn_smile", "text": "Ahh, the light of Guirjule's Star.",  },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "It's brighter than usual, though." },
+		{ "name": "Super Note", "portrait": "sn_worry", "text": "From what little I can recall..." },
+		{ "name": "Super Note", "portrait": "sn_worry", "text": "There's a supercomputer inside our sun." },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "Maybe it's currently overheating... I hope not." },
 		])
-	yield(Globals.dialog_box, "dialog_ended")
-	$Player.is_playable = true
+	yield(Globals.dialog_system, "dialog_ended")
+	player_node.is_playable = true
 
 
 func _on_ElekScene_body_entered(_body):
 	$ElekScene.set_deferred("monitoring", false)
-	$Player.input_vec = Vector2()
-	$Player.is_playable = false
-	$Player.input_vec = Vector2(-1.0, -0.5)
+	player_node.is_playable = false
+	player_node.target_position = $ElekScene.position
 	yield(get_tree().create_timer(1.0), "timeout")
-	$Player.input_vec = Vector2()
 
 
-	Globals.dialog_box.start_dialog([
-		{ "name": "Super Note", "portrait": "sn_shock", "message": "Dammit! The game isn't finished!",  },
-		{ "name": "Super Note", "portrait": "sn_squint", "message": "Not even close." },
-		{ "name": "Super Note", "portrait": "sn_squint", "message": "You know what you have to do." },
+	Globals.dialog_system.start_dialog([
+		{ "name": "Super Note", "portrait": "sn_shock", "text": "Dammit! The game isn't finished!",  },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "Not even close." },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "Developer. You know what you need to do." },
 		])
-	yield(Globals.dialog_box, "dialog_ended")
-	$Player.is_playable = true
+	yield(Globals.dialog_system, "dialog_ended")
+	player_node.is_playable = true

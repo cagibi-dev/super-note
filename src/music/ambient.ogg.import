@@ -12,4 +12,4 @@ dest_files=[ "res://.import/ambient.ogg-7143035b0ac7fae6c2af349965497a0d.oggstr"
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=0.5

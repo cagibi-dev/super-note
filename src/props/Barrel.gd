@@ -8,17 +8,18 @@ export (int) var money := 0
 
 
 func say(line: Dictionary):
-	interactor.input_vec = Vector2()
-	interactor.is_playable = false
 	yield(get_tree().create_timer(0.5), "timeout")
 
-	Globals.dialog_box.start_dialog([line])
-	yield(Globals.dialog_box, "dialog_ended")
+	Globals.dialog_system.start_dialog([line])
+	yield(Globals.dialog_system, "dialog_ended")
 	interactor.is_playable = true
 	emit_signal("first_opened")
 
 
 func _on_1_pressed():
+	interactor.target_position = interactor.position
+	interactor.is_playable = false
+
 	# open or close barrel
 	menu_container_node.hide()
 
@@ -26,22 +27,25 @@ func _on_1_pressed():
 		# Open
 		$Sprite.frame = 1
 		$Open.play()
+		yield(get_tree().create_timer(0.5), "timeout")
 		actions_node.get_child(0).text = "Close"
 
 		if item != "":
-			say({ "message": "You found %s!" % item })
-			Globals.inventory.append(item)
-			item = ""
-			yield(self, "first_opened")
 			$Item.play()
+			say({ "text": "You found %s!" % item })
+			Globals.add_to_inventory(item)
+			item = ""
 		elif money > 0:
-			say({ "message": "You found %s sonats!" % money })
+			$Coins.play()
+			say({ "text": "You found %s sonats!" % money })
 			Globals.money += money
 			money = 0
-			yield(self, "first_opened")
-			$Coins.play()
+		else:
+			interactor.is_playable = true
 	else:
 		# Close
 		$Sprite.frame = 0
 		$Close.play()
+		yield(get_tree().create_timer(0.5), "timeout")
+		interactor.is_playable = true
 		actions_node.get_child(0).text = "Open"

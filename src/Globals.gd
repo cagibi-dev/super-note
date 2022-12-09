@@ -33,7 +33,7 @@ var encounter_data := {
 	"scene": "sewers",
 }
 
-onready var dialog_box := $DialogBox
+onready var dialog_system: DialogSystem = $DialogSystem
 
 
 func _ready():
@@ -43,6 +43,11 @@ func _ready():
 func set_money(new_money: int):
 	money = new_money
 	$Money.text = str(money)
+
+
+func add_to_inventory(item: String):
+	inventory.append(item)
+	# here be special cases
 
 
 func goto_room(room_name: String):

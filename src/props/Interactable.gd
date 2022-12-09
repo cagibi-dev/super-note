@@ -14,5 +14,4 @@ func _on_body_entered(body: PhysicsBody2D):
 
 
 func _on_body_exited(_body):
-	interactor = null
 	menu_container_node.hide()

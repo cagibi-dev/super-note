@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PanelContainer",
+"class": "DialogSystem",
+"language": "GDScript",
+"path": "res://menu/DialogSystem.gd"
+}, {
 "base": "Node2D",
 "class": "EncounterCharacter",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://joystick/virtual_joystick.gd"
 } ]
 _global_script_class_icons={
+"DialogSystem": "",
 "EncounterCharacter": "",
 "VirtualJoystick": ""
 }
@@ -37,6 +43,7 @@ Globals="*res://Globals.tscn"
 
 [debug]
 
+settings/fps/force_fps=30
 gdscript/warnings/return_value_discarded=false
 
 [display]
@@ -76,6 +83,15 @@ texture={
 "svg/scale": 1.0
 }
 
+[input]
+
+use_instrument={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777351,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
@@ -85,6 +101,7 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_1="ground"
 2d_physics/layer_2="player"
 2d_physics/layer_3="danger"
+2d_physics/layer_4="percussion"
 
 [physics]
 
@@ -98,5 +115,6 @@ quality/intended_usage/framebuffer_allocation.mobile=1
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+quality/lightmapping/use_bicubic_sampling=false
 quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
