@@ -475,7 +475,4 @@ text = "  "
 [connection signal="pressed" from="HUD/ActionChoice/Panel/Actions/Talk" to="HUD/ActionChoice" method="_on_Talk_pressed"]
 [connection signal="pressed" from="HUD/ActionChoice/Panel/Actions/Item" to="HUD/ActionChoice" method="_on_Item_pressed"]
 [connection signal="pressed" from="HUD/ActionChoice/PlayChoice/Plays/SoloImpro" to="." method="_on_SoloImpro_pressed"]
-[connection signal="pressed" from="HUD/ActionChoice/PlayChoice/Plays/Song" to="." method="_on_Song_pressed"]
-[connection signal="pressed" from="HUD/ActionChoice/ActChoice/Actions/Check" to="." method="_on_Check_pressed"]
-[connection signal="pressed" from="HUD/ActionChoice/ActChoice/Actions/Scare" to="." method="_on_Scare_pressed"]
 [connection signal="pressed" from="HUD/BackPanel/Back" to="." method="_on_Back_pressed"]

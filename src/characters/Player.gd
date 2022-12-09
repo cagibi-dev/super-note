@@ -1,4 +1,4 @@
-extends "res://characters/OverworldCharacter.gd"
+extends "res://characters/Character.gd"
 
 
 var current_drag_event := -1
@@ -25,18 +25,6 @@ func _ready():
 func handle_input():
 	if anim_node.current_animation in ["percuss"] or not is_playable:
 		return
-	
-	#if current_drag_event < 0:
-	#	target_position = position + 10 * Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	"""if Input.is_action_just_pressed("use_instrument")
-	and "WoodBlocks" in Globals.inventory:
-		anim_node.play("percuss")
-		if velocity.y == 0:
-			velocity.x = 300 * $Sprite.scale.x
-		else:
-			velocity = 300 * input_vec
-		input_vec = Vector2()"""
 
 
 func percuss():

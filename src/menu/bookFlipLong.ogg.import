@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bookFlipLong.ogg-a3f7ae107dbf96dcae53d5bd50ba228f.oggstr"
+
+[deps]
+
+source_file="res://menu/bookFlipLong.ogg"
+dest_files=[ "res://.import/bookFlipLong.ogg-a3f7ae107dbf96dcae53d5bd50ba228f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

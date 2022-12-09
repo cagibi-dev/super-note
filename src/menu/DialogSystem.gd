@@ -21,6 +21,9 @@ func portrait(face_name: String) -> Vector2:
 		"sn_squint": return Vector2(1, 0)
 		"sn_shock": return Vector2(2, 0)
 		"sn_worry": return Vector2(3, 0)
+		"sn_sad": return Vector2(4, 0)
+		"sn_grin": return Vector2(5, 0)
+		"sn_think": return Vector2(6, 0)
 	return Vector2(0, 0)
 
 
@@ -33,6 +36,12 @@ func start_dialog(new_lines: Array):
 func start_line():
 	var new_line: Dictionary = lines[0]
 	msg_node.text = new_line["text"]
+
+	# add line to backlog
+	var new_log: Label = $Node2D/History/Lines/Rows/Template.duplicate()
+	new_log.text = new_line["text"]
+	new_log.show()
+	$Node2D/History/Lines/Rows.add_child(new_log)
 
 	if new_line.has("name"):
 		name_node.text = new_line["name"]
@@ -84,3 +93,16 @@ func _on_DialogBox_visibility_changed():
 	$Next/Touch.visible = visible
 	if visible:
 		$Next/Touch.grab_focus()
+
+
+func _on_Backlog_pressed():
+	if $Node2D/History.visible:
+		$Node2D/History/Close.play()
+		$Next/Touch.show()
+		$Node2D/History.hide()
+		create_tween().tween_property(self, "rect_position", Vector2(4, 6), 0.5)
+	else:
+		$Node2D/History/Open.play()
+		$Next/Touch.hide()
+		$Node2D/History.show()
+		create_tween().tween_property(self, "rect_position", Vector2(4, 120), 0.5)

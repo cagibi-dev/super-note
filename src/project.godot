@@ -18,16 +18,10 @@ _global_script_classes=[ {
 "class": "EncounterCharacter",
 "language": "GDScript",
 "path": "res://characters/EncounterCharacter.gd"
-}, {
-"base": "Control",
-"class": "VirtualJoystick",
-"language": "GDScript",
-"path": "res://joystick/virtual_joystick.gd"
 } ]
 _global_script_class_icons={
 "DialogSystem": "",
-"EncounterCharacter": "",
-"VirtualJoystick": ""
+"EncounterCharacter": ""
 }
 
 [application]

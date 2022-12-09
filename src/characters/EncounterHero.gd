@@ -89,23 +89,10 @@ func _on_Back_pressed():
 	$HUD/ActionChoice.show()
 
 
-func _on_Song_pressed():
-	pass # Replace with function body.
-
-
-func _on_Check_pressed():
-	pass # Replace with function body.
-
-
-func _on_Scare_pressed():
-	pass # Replace with function body.
-
-
 func _on_item_chosen(index: int):
 	$HUD/ActionChoice.hide()
 
 	# consume item
-	# TODO fix item shifting
 	var item: String = Globals.inventory.pop_at(index)
 	$HUD/ActionChoice/Inventory/Items.get_child(index + 1).queue_free()
 	# USE ITEM

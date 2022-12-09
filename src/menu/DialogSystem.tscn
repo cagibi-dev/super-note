@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://characters/portraits.png" type="Texture" id=1]
 [ext_resource path="res://menu/fonts/normal_font.tres" type="DynamicFont" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://menu/xylo.wav" type="AudioStream" id=5]
 [ext_resource path="res://menu/flavortext8.wav" type="AudioStream" id=6]
 [ext_resource path="res://menu/icons/backlog.png" type="Texture" id=7]
+[ext_resource path="res://menu/bookClose.ogg" type="AudioStream" id=8]
+[ext_resource path="res://menu/bookFlipLong.ogg" type="AudioStream" id=9]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
@@ -101,23 +103,60 @@ margin_bottom = 138.0
 rect_min_size = Vector2( 256, 144 )
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 12, -5 )
 
 [node name="Name" type="Label" parent="Node2D"]
-margin_right = 216.0
-margin_bottom = 6.0
+margin_left = 12.0
+margin_top = -4.0
+margin_right = 228.0
+margin_bottom = 2.0
 text = "Super Note"
 valign = 1
 
 [node name="Backlog" type="TextureButton" parent="Node2D"]
-margin_left = 218.0
-margin_top = 7.0
-margin_right = 234.0
-margin_bottom = 23.0
+margin_left = 230.0
+margin_top = 2.0
+margin_right = 246.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 16, 16 )
 texture_normal = ExtResource( 7 )
 expand = true
 stretch_mode = 3
+
+[node name="History" type="PanelContainer" parent="Node2D"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -116.0
+margin_right = 248.0
+margin_bottom = -49.0
+rect_min_size = Vector2( 248, 108 )
+
+[node name="Lines" type="ScrollContainer" parent="Node2D/History"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 244.0
+margin_bottom = 104.0
+scroll_horizontal_enabled = false
+
+[node name="Rows" type="VBoxContainer" parent="Node2D/History/Lines"]
+margin_right = 240.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Template" type="Label" parent="Node2D/History/Lines/Rows"]
+margin_right = 240.0
+margin_bottom = 6.0
+text = "--- DIALOGUE HISTORY ---"
+autowrap = true
+
+[node name="Close" type="AudioStreamPlayer" parent="Node2D/History"]
+stream = ExtResource( 8 )
+bus = "Sound effects"
+
+[node name="Open" type="AudioStreamPlayer" parent="Node2D/History"]
+stream = ExtResource( 9 )
+bus = "Sound effects"
 
 [node name="CharTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -140,4 +179,5 @@ bus = "Sound effects"
 
 [connection signal="visibility_changed" from="." to="." method="_on_DialogBox_visibility_changed"]
 [connection signal="pressed" from="Next/Touch" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Node2D/Backlog" to="." method="_on_Backlog_pressed"]
 [connection signal="timeout" from="CharTimer" to="." method="_on_CharTimer_timeout"]

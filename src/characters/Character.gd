@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 var velocity := Vector2()
+export (String) var actor_name := "Generic actor"
 export (Vector2) var target_position := position
 export (float) var max_speed := 72.0
 export (float) var acceleration := 10.0
