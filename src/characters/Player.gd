@@ -4,8 +4,6 @@ extends "res://characters/Character.gd"
 var current_drag_event := -1
 export (bool) var is_playable := true setget set_playable
 
-onready var anim_node: AnimationPlayer = $Anim
-
 
 func set_playable(new_playable: bool):
 	is_playable = new_playable
@@ -23,24 +21,16 @@ func _ready():
 
 
 func handle_input():
-	if anim_node.current_animation in ["percuss"] or not is_playable:
+	if not is_playable:
 		return
+	# TODO arrow keys on PC only
 
 
-func percuss():
-	var strike := preload("res://effects/Percussion.tscn").instance()
-	strike.position = position + Vector2.UP * 8
-	get_parent().add_child(strike)
-
-
-func _process(_delta):
+func handle_animation():
 	if anim_node.current_animation in ["percuss"]:
 		return
 
-	if velocity.length() > max_speed / 2:
-		anim_node.current_animation = "walk"
-	else:
-		anim_node.current_animation = "idle"
+	.handle_animation()
 	update()
 
 

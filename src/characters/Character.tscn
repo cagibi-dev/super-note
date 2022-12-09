@@ -1,16 +1,112 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://effects/Shadow.tscn" type="PackedScene" id=1]
 [ext_resource path="res://menu/bar_progress.png" type="Texture" id=2]
 [ext_resource path="res://characters/Character.gd" type="Script" id=3]
 [ext_resource path="res://menu/bar_under.png" type="Texture" id=4]
 [ext_resource path="res://menu/unshaded.material" type="Material" id=5]
+[ext_resource path="res://characters/note.png" type="Texture" id=6]
+[ext_resource path="res://characters/step1.wav" type="AudioStream" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.5
 
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.19802, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.257426, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -4.07443, 0.0, 0, 0 ]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StepSmoke:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("StepSmoke:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 5, 6, 7, 6 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("StepSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+}, {
+"args": [ 0.0 ],
+"method": "play"
+} ]
+}
+
 [node name="Character" type="KinematicBody2D"]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource( 3 )
 
 [node name="Shape" type="CollisionShape2D" parent="."]
@@ -18,13 +114,33 @@ position = Vector2( 0, -2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 6 )
 offset = Vector2( 0, -12 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 24, 24 )
+hframes = 5
+vframes = 10
 
 [node name="Shadow" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -1 )
 scale = Vector2( 0.4, 0.4 )
+
+[node name="StepSmoke" type="CPUParticles2D" parent="."]
+emitting = false
+lifetime = 0.6
+local_coords = false
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 6.0
+initial_velocity_random = 1.0
+scale_amount = 6.0
+scale_amount_random = 0.5
+scale_amount_curve = SubResource( 4 )
+
+[node name="StepSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+max_distance = 200.0
+bus = "Sound effects"
 
 [node name="Vibe" type="TextureProgress" parent="."]
 material = ExtResource( 5 )
@@ -32,7 +148,14 @@ margin_left = -8.0
 margin_top = -1.0
 margin_right = 8.0
 margin_bottom = 7.0
+mouse_filter = 2
 max_value = 12.0
 value = 12.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 2 )
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 2 )
+anims/idle = SubResource( 3 )
+anims/walk = SubResource( 5 )

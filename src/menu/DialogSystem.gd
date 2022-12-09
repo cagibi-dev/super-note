@@ -24,6 +24,12 @@ func portrait(face_name: String) -> Vector2:
 		"sn_sad": return Vector2(4, 0)
 		"sn_grin": return Vector2(5, 0)
 		"sn_think": return Vector2(6, 0)
+		"an_neutral": return Vector2(0, 1)
+		"an_smile": return Vector2(1, 1)
+		"an_panic": return Vector2(2, 1)
+		"an_think": return Vector2(3, 1)
+		"an_sad": return Vector2(4, 1)
+		"an_angry": return Vector2(5, 1)
 	return Vector2(0, 0)
 
 
@@ -45,7 +51,10 @@ func start_line():
 
 	if new_line.has("name"):
 		name_node.text = new_line["name"]
-		talk_sound = $Bleeps/SN
+		if new_line["name"] == "Super Note":
+			talk_sound = $Bleeps/SN
+		elif new_line["name"] == "Armonica":
+			talk_sound = $Bleeps/AN
 	else:
 		name_node.text = ""
 		talk_sound = $Bleeps/FlavorText

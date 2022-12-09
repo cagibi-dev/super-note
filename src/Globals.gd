@@ -51,10 +51,6 @@ func add_to_inventory(item: String):
 
 
 func goto_room(room_name: String):
-	# by default: beginning
-	if not room_name:
-		room_name = "res://levels/sewers/Level-Sewers1.tscn"
-
 	previous_room = get_tree().current_scene.filename
 	get_tree().change_scene(room_name)
 
@@ -62,8 +58,9 @@ func goto_room(room_name: String):
 	yield(get_tree(), "idle_frame")
 	for transition in get_tree().get_nodes_in_group("transition"):
 		if transition.destination == previous_room:
-			var player: Node2D = get_tree().get_nodes_in_group("player")[0]
-			player.global_position = transition.global_position - previous_player_offset * 1.5
+			# TODO: use more efficient stuff than groups
+			#var player: Node2D = get_tree().get_nodes_in_group("player")[0]
+			#player.global_position = transition.global_position - previous_player_offset * 1.5
 			break
 
 

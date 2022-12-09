@@ -37,62 +37,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-current = true
-editor_draw_limits = true
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="GoLeft" type="Area2D" parent="Camera2D"]
-position = Vector2( 0, 72 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoLeft"]
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="GoRight" type="Area2D" parent="Camera2D"]
-position = Vector2( 256, 72 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoRight"]
-shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="GoUp" type="Area2D" parent="Camera2D"]
-position = Vector2( 128, 6 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoUp"]
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="GoDown" type="Area2D" parent="Camera2D"]
-position = Vector2( 128, 144 )
-collision_layer = 0
-collision_mask = 2
-
-[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoDown"]
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-
 [node name="Frames" type="Node2D" parent="."]
+visible = false
 z_index = 1000
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Frame1" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
@@ -105,7 +55,7 @@ __meta__ = {
 
 [node name="Frame2" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 256, 144 )
+position = Vector2( 512, 0 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
@@ -115,7 +65,7 @@ __meta__ = {
 
 [node name="Frame3" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 512, 0 )
+position = Vector2( 512, 288 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
@@ -125,7 +75,7 @@ __meta__ = {
 
 [node name="Frame4" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 256, -144 )
+position = Vector2( 0, 288 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
@@ -135,7 +85,7 @@ __meta__ = {
 
 [node name="Frame5" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 768, -144 )
+position = Vector2( 256, -144 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
@@ -145,7 +95,7 @@ __meta__ = {
 
 [node name="Frame6" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 768, 144 )
+position = Vector2( 768, -144 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
@@ -155,13 +105,81 @@ __meta__ = {
 
 [node name="Frame7" type="Line2D" parent="Frames"]
 material = ExtResource( 3 )
-position = Vector2( 512, 288 )
+position = Vector2( 768, 144 )
 points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
 width = 4.0
 default_color = Color( 0, 1, 0, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Frame8" type="Line2D" parent="Frames"]
+material = ExtResource( 3 )
+position = Vector2( 256, 144 )
+points = PoolVector2Array( 0, 0, 256, 0, 256, 144, 0, 144, 0, 0 )
+width = 4.0
+default_color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 128, 72 )
+current = true
+editor_draw_limits = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoLeft" type="Area2D" parent="Camera2D"]
+position = Vector2( 6, 72 )
+z_index = 1000
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoLeft"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoRight" type="Area2D" parent="Camera2D"]
+position = Vector2( 250, 72 )
+z_index = 1000
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoRight"]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoUp" type="Area2D" parent="Camera2D"]
+position = Vector2( 128, 14 )
+z_index = 1000
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoUp"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="GoDown" type="Area2D" parent="Camera2D"]
+position = Vector2( 128, 146 )
+z_index = 1000
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoDown"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [connection signal="body_entered" from="Camera2D/GoLeft" to="." method="_on_GoLeft_body_entered"]
 [connection signal="body_entered" from="Camera2D/GoRight" to="." method="_on_GoRight_body_entered"]

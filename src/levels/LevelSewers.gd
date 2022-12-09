@@ -27,10 +27,11 @@ func _on_WindowScene_body_entered(_body):
 
 	Globals.dialog_system.start_dialog([
 		{ "name": "Super Note", "portrait": "sn_smile", "text": "Ahh, the light of Guirjule's Star.",  },
-		{ "name": "Super Note", "portrait": "sn_squint", "text": "It's brighter than usual, though." },
+		{ "name": "Armonica", "portrait": "an_think", "text": "It's brighter than usual, though." },
 		{ "name": "Super Note", "portrait": "sn_worry", "text": "From what little I can recall..." },
 		{ "name": "Super Note", "portrait": "sn_worry", "text": "There's a supercomputer inside our sun." },
-		{ "name": "Super Note", "portrait": "sn_squint", "text": "Maybe it's currently overheating... I hope not." },
+		{ "name": "Super Note", "portrait": "sn_squint", "text": "Maybe it's currently overheating..." },
+		{ "name": "Armonica", "portrait": "an_neutral", "text": "Well I hope not!" },
 		])
 	yield(Globals.dialog_system, "dialog_ended")
 	player_node.is_playable = true
