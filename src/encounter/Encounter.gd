@@ -45,7 +45,7 @@ func next_character():
 
 	if is_encounter_over():
 		yield(get_tree().create_timer(2.0), "timeout")
-		_on_Leave_pressed()
+		# TODO get out
 		return
 
 	actor_index += 1
@@ -81,8 +81,3 @@ func is_encounter_over():
 		$HUD/Win.show()
 		get_tree().call_group("hero_alive", "victory_pose")
 	return true # encounter is over
-
-
-func _on_Leave_pressed():
-	#Globals.previous_player_offset = Vector2(40, 0)
-	Globals.goto_room(Globals.previous_room)

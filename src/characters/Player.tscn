@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://characters/Player.gd" type="Script" id=2]
 [ext_resource path="res://characters/super_note.png" type="Texture" id=3]
 [ext_resource path="res://characters/wood_block_strike.wav" type="AudioStream" id=5]
 [ext_resource path="res://menu/unshaded.material" type="Material" id=6]
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 12.0
 
 [sub_resource type="Animation" id=6]
 resource_name = "choose"
@@ -37,12 +34,12 @@ texture = ExtResource( 3 )
 
 [node name="Tutorial" type="Label" parent="." index="5"]
 material = ExtResource( 6 )
-margin_left = -34.0
-margin_top = -38.0
-margin_right = 34.0
-margin_bottom = -23.0
-text = "Drag Super Note
-to move!"
+margin_left = -41.0
+margin_top = -40.0
+margin_right = 42.0
+margin_bottom = -25.0
+text = "Tap somewhere
+to move Super Note!"
 align = 1
 
 [node name="WoodBlock" type="AudioStreamPlayer2D" parent="." index="6"]
@@ -62,19 +59,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="ClickArea" type="Area2D" parent="." index="8"]
-position = Vector2( 0, -10 )
-z_index = 1000
-collision_layer = 32768
-collision_mask = 0
-
-[node name="Shape" type="CollisionShape2D" parent="ClickArea" index="0"]
-shape = SubResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Anim" parent="." index="10"]
+[node name="Anim" parent="." index="9"]
 anims/choose = SubResource( 6 )
-
-[connection signal="input_event" from="ClickArea" to="." method="_on_ClickArea_input_event"]

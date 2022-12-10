@@ -53,7 +53,7 @@ visible = false
 color = Color( 0.2, 0.333333, 0.466667, 1 )
 
 [node name="Player" parent="." index="5"]
-position = Vector2( 104, 80 )
+position = Vector2( 712, 104 )
 
 [node name="BarsLight" type="Light2D" parent="." index="6"]
 position = Vector2( 32, 60 )

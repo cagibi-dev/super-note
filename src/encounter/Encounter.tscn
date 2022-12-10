@@ -193,5 +193,3 @@ color = Color( 1, 0.164706, 0, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[connection signal="pressed" from="HUD/LeavePanel/Leave" to="." method="_on_Leave_pressed"]

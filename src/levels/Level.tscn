@@ -38,7 +38,6 @@ __meta__ = {
 }
 
 [node name="Frames" type="Node2D" parent="."]
-visible = false
 z_index = 1000
 __meta__ = {
 "_edit_lock_": true
