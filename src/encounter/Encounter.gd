@@ -2,7 +2,7 @@ extends Node2D
 
 
 var actor_index := 0 # ID of the active hero or enemy
-export (bool) var is_enemys_turn := false
+@export (bool) var is_enemys_turn := false
 
 
 func _ready():
@@ -13,14 +13,14 @@ func _ready():
 		hero.position = $HeroPositions.get_child(hero_index).position
 		$Heroes.add_child(hero)
 
-		hero.connect("finished_acting", self, "_on_actor_finished_acting", [ hero ])
+		hero.connect("finished_acting",Callable(self,"_on_actor_finished_acting").bind( hero ))
 
 	for enemy_index in range(len(Globals.encounter_data.enemies)):
 		var enemy: EncounterCharacter = Globals.encounter_data.enemies[enemy_index]
 		enemy.position = $EnemyPositions.get_child(enemy_index).position
 		$Enemies.add_child(enemy)
 
-		enemy.connect("finished_acting", self, "_on_actor_finished_acting", [ enemy ])
+		enemy.connect("finished_acting",Callable(self,"_on_actor_finished_acting").bind( enemy ))
 
 	if is_enemys_turn:
 		Globals.encounter_data.enemies[0]._on_turn()
@@ -41,10 +41,10 @@ func _exit_tree():
 
 func next_character():
 	# wait for dead characters to disappear from the scene tree
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 
 	if is_encounter_over():
-		yield(get_tree().create_timer(2.0), "timeout")
+		await get_tree().create_timer(2.0).timeout
 		# TODO get out
 		return
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/harmonica.wav-818f5d6dc99e5b2a31053c15c922d16f.sample"
+type="AudioStreamWAV"
+uid="uid://bh0di555s81n5"
+path="res://.godot/imported/harmonica.wav-818f5d6dc99e5b2a31053c15c922d16f.sample"
 
 [deps]
 
 source_file="res://menu/harmonica.wav"
-dest_files=[ "res://.import/harmonica.wav-818f5d6dc99e5b2a31053c15c922d16f.sample" ]
+dest_files=["res://.godot/imported/harmonica.wav-818f5d6dc99e5b2a31053c15c922d16f.sample"]
 
 [params]
 

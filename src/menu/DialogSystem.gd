@@ -5,13 +5,13 @@ signal dialog_ended
 
 # Each line is a Dict with keys: name?, text, portrait?
 # all of them String values
-export (Array) var lines := []
-export (int) var character_step := 2
+@export var lines := []
+@export var character_step := 2
 
-onready var msg_node: Label = $HBoxContainer/Message
-onready var name_node: Label = $Node2D/Name
-onready var portrait_node: TextureRect = $HBoxContainer/Portrait
-onready var talk_sound: AudioStreamPlayer = $Bleeps/SN
+@onready var msg_node: Label = $HBoxContainer/Message
+@onready var name_node: Label = $Node2D/Name
+@onready var portrait_node: TextureRect = $HBoxContainer/Portrait
+@onready var talk_sound: AudioStreamPlayer = $Bleeps/SN
 
 
 func portrait(face_name: String) -> Vector2:
@@ -108,9 +108,9 @@ func _on_Backlog_pressed():
 		$Node2D/History/Close.play()
 		$Next/Touch.show()
 		$Node2D/History.hide()
-		create_tween().tween_property(self, "rect_position", Vector2(4, 6), 0.5)
+		create_tween().tween_property(self, "position", Vector2(4, 6), 0.5)
 	else:
 		$Node2D/History/Open.play()
 		$Next/Touch.hide()
 		$Node2D/History.show()
-		create_tween().tween_property(self, "rect_position", Vector2(4, 120), 0.5)
+		create_tween().tween_property(self, "position", Vector2(4, 120), 0.5)

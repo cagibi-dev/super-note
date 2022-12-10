@@ -10,34 +10,34 @@ var room_data := {}
 
 # our heroes
 var party := [
-	preload("res://characters/EncounterHero.tscn").instance(),
-	preload("res://characters/EncounterHero.tscn").instance(),
-	preload("res://characters/EncounterHero.tscn").instance(),
-	preload("res://characters/EncounterHero.tscn").instance(),
-	preload("res://characters/EncounterHero.tscn").instance(),
+	preload("res://characters/EncounterHero.tscn").instantiate(),
+	preload("res://characters/EncounterHero.tscn").instantiate(),
+	preload("res://characters/EncounterHero.tscn").instantiate(),
+	preload("res://characters/EncounterHero.tscn").instantiate(),
+	preload("res://characters/EncounterHero.tscn").instantiate(),
 ]
 var inventory := []
-var money := 0 setget set_money
+var money := 0 : set = set_money
 
 # stuff about encounters apart from our heroes
 var encounter_data := {
 	"enemies": [
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
-		preload("res://enemies/Rat.tscn").instance(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
+		preload("res://enemies/Rat.tscn").instantiate(),
 	],
 	"scene": "sewers",
 }
 
-onready var dialog_system: DialogSystem = $DialogSystem
+@onready var dialog_system: DialogSystem = $DialogSystem
 
 
 func _ready():
-	OS.window_size *= 3
+	get_viewport().size *= 3
 
 
 func set_money(new_money: int):
@@ -52,10 +52,10 @@ func add_to_inventory(item: String):
 
 func goto_room(room_name: String):
 	previous_room = get_tree().current_scene.filename
-	get_tree().change_scene(room_name)
+	get_tree().change_scene_to_file(room_name)
 
 	# teleport player to where it came from + offset
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	for transition in get_tree().get_nodes_in_group("transition"):
 		if transition.destination == previous_room:
 			# TODO: use more efficient stuff than groups

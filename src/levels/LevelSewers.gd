@@ -5,7 +5,7 @@ func _on_BarrelWithInstrument_first_opened():
 	player_node.target_position = player_node.position
 	player_node.is_playable = false
 
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	Globals.dialog_system.start_dialog([
 		{ "text": "With instruments, Super Note is able to communicate!", },
 		{ "name": "Super Note", "portrait": "sn_smile", "text": "Ah, wood blocks. I can sort of talk now.",  },
@@ -13,7 +13,7 @@ func _on_BarrelWithInstrument_first_opened():
 		{ "name": "Super Note", "portrait": "sn_shock", "text": "200 years old!?" },
 		{ "name": "Super Note", "portrait": "sn_worry", "text": "Is that really how long I was deactivated...?" },
 		])
-	yield(Globals.dialog_system, "dialog_ended")
+	await Globals.dialog_system.dialog_ended
 	Globals.play_music(preload("res://music/sewers.ogg"))
 	player_node.is_playable = true
 
@@ -22,7 +22,7 @@ func _on_WindowScene_body_entered(_body):
 	$WindowScene.set_deferred("monitoring", false)
 	player_node.is_playable = false
 	player_node.target_position = $WindowScene.position
-	yield(get_tree().create_timer(1.5), "timeout")
+	await get_tree().create_timer(1.5).timeout
 
 
 	Globals.dialog_system.start_dialog([
@@ -33,7 +33,7 @@ func _on_WindowScene_body_entered(_body):
 		{ "name": "Super Note", "portrait": "sn_squint", "text": "Maybe it's currently overheating..." },
 		{ "name": "Armonica", "portrait": "an_neutral", "text": "Well I hope not!" },
 		])
-	yield(Globals.dialog_system, "dialog_ended")
+	await Globals.dialog_system.dialog_ended
 	player_node.is_playable = true
 
 
@@ -41,7 +41,7 @@ func _on_ElekScene_body_entered(_body):
 	$ElekScene.set_deferred("monitoring", false)
 	player_node.is_playable = false
 	player_node.target_position = $ElekScene.position
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 
 
 	Globals.dialog_system.start_dialog([
@@ -49,5 +49,5 @@ func _on_ElekScene_body_entered(_body):
 		{ "name": "Super Note", "portrait": "sn_squint", "text": "Not even close." },
 		{ "name": "Super Note", "portrait": "sn_squint", "text": "Developer. You know what you need to do." },
 		])
-	yield(Globals.dialog_system, "dialog_ended")
+	await Globals.dialog_system.dialog_ended
 	player_node.is_playable = true

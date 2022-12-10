@@ -1,7 +1,7 @@
 extends "res://characters/Character.gd"
 
 
-export (NodePath) var following: NodePath
+@export (NodePath) var following: NodePath
 var following_node: Node2D
 
 func _ready():

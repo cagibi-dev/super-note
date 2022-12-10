@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/ambient.ogg-7143035b0ac7fae6c2af349965497a0d.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://l5e513an02sa"
+path="res://.godot/imported/ambient.ogg-7143035b0ac7fae6c2af349965497a0d.oggvorbisstr"
 
 [deps]
 
 source_file="res://music/ambient.ogg"
-dest_files=[ "res://.import/ambient.ogg-7143035b0ac7fae6c2af349965497a0d.oggstr" ]
+dest_files=["res://.godot/imported/ambient.ogg-7143035b0ac7fae6c2af349965497a0d.oggvorbisstr"]
 
 [params]
 
 loop=true
 loop_offset=0.5
+bpm=0
+beat_count=0
+bar_beats=4

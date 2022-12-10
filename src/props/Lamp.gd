@@ -1,7 +1,7 @@
 extends "res://props/Interactable.gd"
 
 
-export (bool) var active := true setget set_active
+@export (bool) var active := true : set = set_active
 
 
 func _ready():
@@ -13,16 +13,16 @@ func set_active(new_active: bool):
 	if not is_inside_tree():
 		return
 	if active:
-		$Sprite.frame = 0
-		$Light2D.show()
+		$Sprite2D.frame = 0
+		$PointLight2D.show()
 		$FlickerTimer.start()
 	else:
-		$Sprite.frame = 1
-		$Light2D.hide()
+		$Sprite2D.frame = 1
+		$PointLight2D.hide()
 		$FlickerTimer.stop()
 
 
-# Those lamps can be shut on/off by smashing them
+# Those lamps can be shut checked/unchecked by smashing them
 # body = percussion
 func _on_body_entered(_body: PhysicsBody2D):
 	set_active(not active)
@@ -30,11 +30,11 @@ func _on_body_entered(_body: PhysicsBody2D):
 
 
 func _on_FlickerTimer_timeout():
-	# turn on and off
-	if $Light2D.visible:
-		$Light2D.hide()
-		$FlickerTimer.wait_time = rand_range(0.05, 0.1)
+	# turn checked and unchecked
+	if $PointLight2D.visible:
+		$PointLight2D.hide()
+		$FlickerTimer.wait_time = randf_range(0.05, 0.1)
 	else:
-		$Light2D.show()
-		$FlickerTimer.wait_time = rand_range(0.2, 5)
+		$PointLight2D.show()
+		$FlickerTimer.wait_time = randf_range(0.2, 5)
 	$FlickerTimer.start()

@@ -3,8 +3,8 @@ extends Area2D
 
 var interactor: Node2D = null
 
-onready var menu_container_node := $MenuTail
-onready var actions_node := $MenuTail/Menu/Actions
+@onready var menu_container_node := $MenuTail
+@onready var actions_node := $MenuTail/Menu/Actions
 
 
 func _on_body_entered(body: PhysicsBody2D):

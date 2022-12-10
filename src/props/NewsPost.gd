@@ -1,7 +1,7 @@
 extends "res://props/Interactable.gd"
 
 
-export (Array, Dictionary) var lines := []
+@export (Array, Dictionary) var lines := []
 
 
 

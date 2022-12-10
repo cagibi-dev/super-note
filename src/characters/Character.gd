@@ -1,14 +1,13 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
-var velocity := Vector2()
-export (String) var actor_name := "Generic actor"
-export (Vector2) var target_position := position
-export (float) var max_speed := 72.0
-export (float) var acceleration := 10.0
+@export var actor_name := "Generic actor"
+@export var target_position := position
+@export var max_speed := 72.0
+@export var acceleration := 10.0
 
-onready var anim_node: AnimationPlayer = $Anim
-onready var sprite_node: Sprite = $Sprite
+@onready var anim_node: AnimationPlayer = $Anim
+@onready var sprite_node: Sprite2D = $Sprite2D
 
 
 func handle_input():
@@ -23,7 +22,7 @@ func handle_animation():
 		new_anim = "idle"
 	if anim_node.current_animation != new_anim:
 		anim_node.play("RESET")
-		yield(anim_node, "animation_finished")
+		await anim_node.animation_finished
 		anim_node.play(new_anim)
 
 
@@ -44,4 +43,6 @@ func _physics_process(delta: float):
 	elif velocity.x < 0:
 		sprite_node.scale.x = -1
 
-	velocity = move_and_slide(velocity)
+	set_velocity(velocity)
+	move_and_slide()
+	velocity = velocity

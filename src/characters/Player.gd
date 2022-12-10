@@ -1,7 +1,7 @@
 extends "res://characters/Character.gd"
 
 
-export (bool) var is_playable := true setget set_playable
+@export var is_playable := true : set = set_playable
 var uses_arrows := false
 
 
@@ -11,8 +11,8 @@ func set_playable(new_playable: bool):
 		target_position = position
 	if is_inside_tree():
 		var bar_height := 0.0 if is_playable else 16.0
-		create_tween().tween_property($CutsceneBars/Top, "margin_bottom", bar_height, 0.2)
-		create_tween().tween_property($CutsceneBars/Bottom, "margin_top", -bar_height, 0.2)
+		create_tween().tween_property($CutsceneBars/Top, "offset_bottom", bar_height, 0.2)
+		create_tween().tween_property($CutsceneBars/Bottom, "offset_top", -bar_height, 0.2)
 
 
 func _ready():
@@ -22,7 +22,7 @@ func _ready():
 func handle_input():
 	if not is_playable:
 		return
-	# arrow keys on PC only
+	# arrow keys checked PC only
 	var arrow_vec := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if not arrow_vec.is_equal_approx(Vector2.ZERO):
 		uses_arrows = true
@@ -35,8 +35,7 @@ func handle_animation():
 	if anim_node.current_animation in ["percuss"]:
 		return
 
-	.handle_animation()
-	update()
+	super.handle_animation()
 
 
 func _unhandled_input(event: InputEvent):

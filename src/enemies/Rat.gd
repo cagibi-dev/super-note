@@ -1,7 +1,7 @@
 extends EncounterCharacter
 
 
-onready var anim_node: AnimationPlayer = $Anim
+@onready var anim_node: AnimationPlayer = $Anim
 
 
 func set_vibe(new_vibe: int):
@@ -17,7 +17,7 @@ func set_vibe(new_vibe: int):
 			anim_node.play("die")
 			$Vibe.hide()
 
-	.set_vibe(new_vibe)
+	super.set_vibe(new_vibe)
 
 
 func is_alive() -> bool:
@@ -29,7 +29,7 @@ func _on_turn():
 		emit_signal("finished_acting")
 		return
 	anim_node.play("attack")
-	yield(anim_node, "animation_finished")
+	await anim_node.animation_finished
 
 	# choose a random player to attack
 	var heroes := get_tree().get_nodes_in_group("hero_alive")
@@ -38,7 +38,7 @@ func _on_turn():
 		var dmg: int = min_atk + randi() % atk_rand_range
 		hero.vibe -= dmg
 		spawn_number(hero.position, dmg)
-		yield(hero, "finished_reacting")
+		await hero.finished_reacting
 
 	emit_signal("finished_acting")
 

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/flavortext8.wav-fcef378af4865d220206a46c91de7576.sample"
+type="AudioStreamWAV"
+uid="uid://rgpq8q5sipnv"
+path="res://.godot/imported/flavortext8.wav-fcef378af4865d220206a46c91de7576.sample"
 
 [deps]
 
 source_file="res://menu/flavortext8.wav"
-dest_files=[ "res://.import/flavortext8.wav-fcef378af4865d220206a46c91de7576.sample" ]
+dest_files=["res://.godot/imported/flavortext8.wav-fcef378af4865d220206a46c91de7576.sample"]
 
 [params]
 

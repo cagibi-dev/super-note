@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/handleCoins.ogg-f63b14b9f7e03f3f7d70c643e077012c.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cw46bu1nect5c"
+path="res://.godot/imported/handleCoins.ogg-f63b14b9f7e03f3f7d70c643e077012c.oggvorbisstr"
 
 [deps]
 
 source_file="res://props/handleCoins.ogg"
-dest_files=[ "res://.import/handleCoins.ogg-f63b14b9f7e03f3f7d70c643e077012c.oggstr" ]
+dest_files=["res://.godot/imported/handleCoins.ogg-f63b14b9f7e03f3f7d70c643e077012c.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

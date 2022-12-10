@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/xylo.wav-d1aa7c0c5ed30b77916bad490a4b5b67.sample"
+type="AudioStreamWAV"
+uid="uid://bn5skcelu0e0m"
+path="res://.godot/imported/xylo.wav-d1aa7c0c5ed30b77916bad490a4b5b67.sample"
 
 [deps]
 
 source_file="res://menu/xylo.wav"
-dest_files=[ "res://.import/xylo.wav-d1aa7c0c5ed30b77916bad490a4b5b67.sample" ]
+dest_files=["res://.godot/imported/xylo.wav-d1aa7c0c5ed30b77916bad490a4b5b67.sample"]
 
 [params]
 

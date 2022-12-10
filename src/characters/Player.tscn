@@ -1,63 +1,182 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://bc8h68mqctwdf"]
 
-[ext_resource path="res://characters/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://characters/Player.gd" type="Script" id=2]
-[ext_resource path="res://characters/super_note.png" type="Texture" id=3]
-[ext_resource path="res://characters/wood_block_strike.wav" type="AudioStream" id=5]
-[ext_resource path="res://menu/unshaded.material" type="Material" id=6]
+[ext_resource type="PackedScene" path="res://characters/Character.tscn" id="1"]
+[ext_resource type="Script" path="res://characters/Player.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://dp5u3xmlxy7kj" path="res://characters/super_note.png" id="3"]
+[ext_resource type="AudioStream" uid="uid://uy08jnbyeyns" path="res://characters/wood_block_strike.wav" id="5"]
+[ext_resource type="FontFile" uid="uid://8d8eprmr2jux" path="res://menu/fonts/Kenney Mini.ttf" id="5_lmapn"]
+[ext_resource type="Material" path="res://menu/unshaded.material" id="6"]
 
-[sub_resource type="Animation" id=6]
-resource_name = "choose"
-length = 0.6
-loop = true
+[sub_resource type="LabelSettings" id="LabelSettings_kekpv"]
+line_spacing = -3.0
+font = ExtResource("5_lmapn")
+font_size = 8
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 10, 11, 12, 13 ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StepSmoke:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
 }
 
-[node name="Player" instance=ExtResource( 1 )]
-collision_layer = 2
-script = ExtResource( 2 )
-actor_name = "Super Note"
-is_playable = true
+[sub_resource type="Animation" id="6"]
+resource_name = "choose"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13]
+}
 
-[node name="Sprite" parent="." index="1"]
-texture = ExtResource( 3 )
+[sub_resource type="Animation" id="3"]
+resource_name = "idle"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "walk"
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StepSmoke:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 6]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StepSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7n2so"]
+_data = {
+"RESET": SubResource("2"),
+"choose": SubResource("6"),
+"idle": SubResource("3"),
+"walk": SubResource("5")
+}
+
+[node name="Player" instance=ExtResource("1")]
+collision_layer = 2
+script = ExtResource("2")
+is_playable = true
+actor_name = "Super Note"
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3")
+
+[node name="StepSmoke" parent="." index="3"]
+scale_amount_min = 2.0
+scale_amount_max = 6.0
+
+[node name="StepSound" parent="." index="4"]
+bus = &"Sound effects"
 
 [node name="Tutorial" type="Label" parent="." index="5"]
-material = ExtResource( 6 )
-margin_left = -60.0
-margin_top = -42.0
-margin_right = 60.0
-margin_bottom = -27.0
+material = ExtResource("6")
+offset_left = -60.0
+offset_top = -42.0
+offset_right = 60.0
+offset_bottom = -24.0
 text = "Tap somewhere or use arrow
 keys to move Super Note!"
-align = 1
+label_settings = SubResource("LabelSettings_kekpv")
+horizontal_alignment = 1
 
 [node name="WoodBlock" type="AudioStreamPlayer2D" parent="." index="6"]
-stream = ExtResource( 5 )
+stream = ExtResource("5")
 volume_db = 10.0
-bus = "Sound effects"
+bus = &"Sound effects"
 
 [node name="CutsceneBars" type="CanvasLayer" parent="." index="7"]
 
 [node name="Top" type="ColorRect" parent="CutsceneBars" index="0"]
+anchors_preset = 10
 anchor_right = 1.0
-color = Color( 0, 0, 0, 1 )
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Bottom" type="ColorRect" parent="CutsceneBars" index="1"]
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
 
 [node name="Anim" parent="." index="9"]
-anims/choose = SubResource( 6 )
+libraries = {
+"": SubResource("AnimationLibrary_7n2so")
+}

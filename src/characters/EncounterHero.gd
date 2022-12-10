@@ -1,11 +1,11 @@
 extends "res://characters/EncounterCharacter.gd"
 
 
-onready var anim_node: AnimationPlayer = $Anim
+@onready var anim_node: AnimationPlayer = $Anim
 
 
 func _ready():
-	$HUD/ActionChoice.rect_position = global_position
+	$HUD/ActionChoice.position = global_position
 	refresh_inventory()
 
 
@@ -21,7 +21,7 @@ func refresh_inventory():
 		var item_button := template.duplicate()
 		item_button.text = item
 		item_button.show()
-		item_button.connect("pressed", self, "_on_item_chosen", [ i ])
+		item_button.connect("pressed",Callable(self,"_on_item_chosen").bind( i ))
 		i += 1
 		container.add_child(item_button)
 
@@ -39,7 +39,7 @@ func set_vibe(new_vibe: int):
 			remove_from_group("hero_alive")
 			$Vibe.hide()
 
-	.set_vibe(new_vibe)
+	super.set_vibe(new_vibe)
 
 
 func _on_turn():
@@ -51,7 +51,7 @@ func _on_turn():
 func _on_SoloImpro_pressed():
 	# make selection of every actor alive
 	$HUD/BackPanel.show()
-	$HUD/Info.text = "Solo Impro: raise the Vibe of one person."
+	$HUD/Info.text = "Solo Impro: move_to_front the Vibe of one person."
 	$HUD/ActionChoice.hide()
 	var actors := get_tree().get_nodes_in_group("enemy_alive")
 	actors.append_array(get_tree().get_nodes_in_group("hero_alive"))
@@ -60,7 +60,7 @@ func _on_SoloImpro_pressed():
 		sel.show()
 		sel.position = actor.global_position - global_position
 		sel.get_child(0).text = actor.actor_name
-		sel.get_child(1).connect("pressed", self, "solo_impro", [ actor ])
+		sel.get_child(1).connect("pressed",Callable(self,"solo_impro").bind( actor ))
 		$Selectables.add_child(sel)
 
 
@@ -71,12 +71,12 @@ func solo_impro(actor: EncounterCharacter):
 	$HUD/Info.text = ""
 
 	anim_node.play("play")
-	yield(anim_node, "animation_finished")
+	await anim_node.animation_finished
 
 	var dmg: int = min_atk + randi() % atk_rand_range
 	actor.vibe += dmg
 	spawn_number(actor.position, dmg)
-	yield(actor, "finished_reacting")
+	await actor.finished_reacting
 
 	emit_signal("finished_acting")
 
@@ -99,7 +99,7 @@ func _on_item_chosen(index: int):
 	if item == "CoolPotion":
 		spawn_number(position, 8, true)
 		set_vibe(vibe + 8)
-		yield(anim_node, "animation_finished")
+		await anim_node.animation_finished
 	emit_signal("finished_acting")
 	refresh_inventory()
 

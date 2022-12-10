@@ -1,15 +1,19 @@
 [remap]
 
-importer="ogg_vorbis"
-type="AudioStreamOGGVorbis"
-path="res://.import/bookClose.ogg-47bd3a739588c40c2f1d6afc2503c995.oggstr"
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://4jodxbieljjx"
+path="res://.godot/imported/bookClose.ogg-47bd3a739588c40c2f1d6afc2503c995.oggvorbisstr"
 
 [deps]
 
 source_file="res://menu/bookClose.ogg"
-dest_files=[ "res://.import/bookClose.ogg-47bd3a739588c40c2f1d6afc2503c995.oggstr" ]
+dest_files=["res://.godot/imported/bookClose.ogg-47bd3a739588c40c2f1d6afc2503c995.oggvorbisstr"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

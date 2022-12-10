@@ -16,13 +16,13 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource( 3 )
 
-[node name="Shape" type="CollisionShape2D" parent="."]
+[node name="Shape3D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -4 )
 shape = SubResource( 1 )
 
 [node name="Obstacle" type="StaticBody2D" parent="."]
 
-[node name="Shape" type="CollisionShape2D" parent="Obstacle"]
+[node name="Shape3D" type="CollisionShape2D" parent="Obstacle"]
 position = Vector2( 0, -4 )
 shape = SubResource( 2 )
 
@@ -31,31 +31,31 @@ visible = false
 use_parent_material = true
 position = Vector2( 0, -24 )
 color = Color( 0, 0, 0, 1 )
-polygon = PoolVector2Array( -8, 0, 0, 8, 8, 0 )
+polygon = PackedVector2Array( -8, 0, 0, 8, 8, 0 )
 
 [node name="Menu" type="PanelContainer" parent="MenuTail"]
 material = SubResource( 3 )
-margin_left = -32.0
-margin_top = -16.0
-margin_right = 32.0
-margin_bottom = 3.0
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 3.0
 grow_vertical = 0
-rect_pivot_offset = Vector2( 0, 19 )
+pivot_offset = Vector2( 0, 19 )
 
 [node name="Actions" type="VBoxContainer" parent="MenuTail/Menu"]
 use_parent_material = true
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 60.0
-margin_bottom = 15.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 60.0
+offset_bottom = 15.0
 
-[node name="1" type="ToolButton" parent="MenuTail/Menu/Actions"]
+[node name="1" type="Button" parent="MenuTail/Menu/Actions"]
 use_parent_material = true
-margin_right = 56.0
-margin_bottom = 11.0
+offset_right = 56.0
+offset_bottom = 11.0
 text = "Open"
 
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 process_parent = true
 physics_process_parent = true
 
