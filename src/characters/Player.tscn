@@ -34,12 +34,12 @@ texture = ExtResource( 3 )
 
 [node name="Tutorial" type="Label" parent="." index="5"]
 material = ExtResource( 6 )
-margin_left = -41.0
-margin_top = -40.0
-margin_right = 42.0
-margin_bottom = -25.0
-text = "Tap somewhere
-to move Super Note!"
+margin_left = -60.0
+margin_top = -42.0
+margin_right = 60.0
+margin_bottom = -27.0
+text = "Tap somewhere or use arrow
+keys to move Super Note!"
 align = 1
 
 [node name="WoodBlock" type="AudioStreamPlayer2D" parent="." index="6"]

@@ -143,15 +143,10 @@ margin_right = 244.0
 margin_bottom = 104.0
 scroll_horizontal_enabled = false
 
-[node name="Rows" type="VBoxContainer" parent="Node2D/History/Lines"]
-margin_right = 240.0
-margin_bottom = 100.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Template" type="Label" parent="Node2D/History/Lines/Rows"]
+[node name="Text" type="Label" parent="Node2D/History/Lines"]
 margin_right = 240.0
 margin_bottom = 6.0
+size_flags_horizontal = 3
 text = "--- DIALOGUE HISTORY ---"
 autowrap = true
 

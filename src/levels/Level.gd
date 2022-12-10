@@ -27,6 +27,7 @@ func snap_camera():
 func move_camera(cell_shift: Vector2):
 	snap_camera()
 	if player_node.is_playable:
+		player_node.uses_arrows = false
 		player_node.target_position += cell_shift * WALKOUT_OFFSET
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SINE)

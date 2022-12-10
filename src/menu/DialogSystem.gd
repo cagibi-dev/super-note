@@ -44,10 +44,7 @@ func start_line():
 	msg_node.text = new_line["text"]
 
 	# add line to backlog
-	var new_log: Label = $Node2D/History/Lines/Rows/Template.duplicate()
-	new_log.text = new_line["text"]
-	new_log.show()
-	$Node2D/History/Lines/Rows.add_child(new_log)
+	$Node2D/History/Lines/Text.text += "\n" + new_line["text"]
 
 	if new_line.has("name"):
 		name_node.text = new_line["name"]
@@ -55,6 +52,8 @@ func start_line():
 			talk_sound = $Bleeps/SN
 		elif new_line["name"] == "Armonica":
 			talk_sound = $Bleeps/AN
+		else:
+			talk_sound = $Bleeps/FlavorText
 	else:
 		name_node.text = ""
 		talk_sound = $Bleeps/FlavorText

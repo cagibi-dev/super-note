@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://effects/light_texture.tres" type="Texture" id=1]
 [ext_resource path="res://levels/Level.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://effects/bars_light.png" type="Texture" id=4]
 [ext_resource path="res://props/Barrel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://props/Lamp.tscn" type="PackedScene" id=6]
+[ext_resource path="res://props/NewsPost.tscn" type="PackedScene" id=7]
 [ext_resource path="res://music/ambient.ogg" type="AudioStream" id=8]
 
 [sub_resource type="Gradient" id=1]
@@ -294,6 +295,13 @@ __meta__ = {
 position = Vector2( 728, 40 )
 item = ""
 money = 2
+
+[node name="NewsPost" parent="." index="38" instance=ExtResource( 7 )]
+position = Vector2( 872, -88 )
+lines = [ {
+"name": "Electric News",
+"text": "Our supreme leader, King Indra, reassuring on the growing sun"
+} ]
 
 [connection signal="first_opened" from="BarrelWithInstrument" to="." method="_on_BarrelWithInstrument_first_opened"]
 [connection signal="body_entered" from="WindowScene" to="." method="_on_WindowScene_body_entered"]

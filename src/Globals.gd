@@ -37,7 +37,7 @@ onready var dialog_system: DialogSystem = $DialogSystem
 
 
 func _ready():
-	OS.window_size *= 4
+	OS.window_size *= 3
 
 
 func set_money(new_money: int):

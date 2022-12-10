@@ -2,6 +2,7 @@ extends "res://characters/Character.gd"
 
 
 export (bool) var is_playable := true setget set_playable
+var uses_arrows := false
 
 
 func set_playable(new_playable: bool):
@@ -21,7 +22,13 @@ func _ready():
 func handle_input():
 	if not is_playable:
 		return
-	# TODO arrow keys on PC only
+	# arrow keys on PC only
+	var arrow_vec := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if not arrow_vec.is_equal_approx(Vector2.ZERO):
+		uses_arrows = true
+		$Tutorial.hide()
+	if uses_arrows:
+		target_position = position + arrow_vec * 10
 
 
 func handle_animation():
@@ -37,4 +44,5 @@ func _unhandled_input(event: InputEvent):
 		return
 	if event is InputEventScreenTouch and event.is_pressed():
 		$Tutorial.hide()
+		uses_arrows = false
 		target_position = get_viewport().canvas_transform.inverse() * event.position - Vector2.UP * 8
