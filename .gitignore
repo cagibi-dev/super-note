@@ -2,4 +2,5 @@ bin/
 r&d/
 screenshots/
 src/.import/
+src/.godot/
 src/export_presets.cfg
