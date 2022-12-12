@@ -4,16 +4,8 @@ extends Node
 var previous_room := ""
 var previous_player_offset := Vector2()
 
-# key = room filename,
-# data = TODO
-var room_data := {}
-
 # our heroes
 var party := [
-	preload("res://characters/EncounterHero.tscn").instantiate(),
-	preload("res://characters/EncounterHero.tscn").instantiate(),
-	preload("res://characters/EncounterHero.tscn").instantiate(),
-	preload("res://characters/EncounterHero.tscn").instantiate(),
 	preload("res://characters/EncounterHero.tscn").instantiate(),
 ]
 var inventory := []
@@ -22,13 +14,7 @@ var money := 0 : set = set_money
 # stuff about encounters apart from our heroes
 var encounter_data := {
 	"enemies": [
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
-		preload("res://enemies/Rat.tscn").instantiate(),
+		#preload("res://enemies/Rat.tscn").instantiate(),
 	],
 	"scene": "sewers",
 }

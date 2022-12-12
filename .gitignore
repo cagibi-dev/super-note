@@ -1,6 +1,5 @@
 bin/
 r&d/
-screenshots/
-src/.import/
-src/.godot/
-src/export_presets.cfg
+screenshots/.import/
+.godot/
+export_presets.cfg

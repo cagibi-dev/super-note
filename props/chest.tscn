@@ -1,0 +1,10 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://props/Interactable.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://effects/Shadow.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://qjnb35o3vcme" path="res://props/barrel.png" id="3"]
+[ext_resource type="Script" path="res://props/chest.gd" id="4"]
+[ext_resource type="AudioStream" uid="uid://b0besimjg16cr" path="res://props/creak3.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://bfgpoil2dpxc" path="res://props/door_close_02.ogg" id="6"]
+[ext_resource type="AudioStream" uid="uid://cw46bu1nect5c" path="res://props/handleCoins.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://d2ys6cwdp3150" path="res://props/got_item.wav" id="8"]

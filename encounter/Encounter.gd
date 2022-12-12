@@ -2,7 +2,7 @@ extends Node2D
 
 
 var actor_index := 0 # ID of the active hero or enemy
-@export (bool) var is_enemys_turn := false
+@export var is_enemys_turn := false
 
 
 func _ready():

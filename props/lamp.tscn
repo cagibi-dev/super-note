@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://props/interactable.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://yi5pv1ofrcry" path="res://props/lamp.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://b68u6mngmdyk2" path="res://effects/light_texture.tres" id="3"]
+[ext_resource type="Script" path="res://props/Lamp.gd" id="4"]
+[ext_resource type="AudioStream" uid="uid://jq4fwvg5q2i0" path="res://props/hit_lamp.wav" id="5"]
+"." index="5"]
+wait_time = 3.0
+autostart = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="." index="7"]
+stream = ExtResource( 5 )
+volume_db = 6.0
+bus = "Sound effects"
+
+[node name="Anim" type="AnimationPlayer" parent="." index="8"]
+anims/RESET = SubResource( 1 )
+anims/hit = SubResource( 2 )
+
+[connection signal="timeout" from="FlickerTimer" to="." method="_on_FlickerTimer_timeout"]

@@ -1,51 +1,50 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://btucf3qm7tk60"]
 
-[ext_resource path="res://characters/portraits.png" type="Texture2D" id=1]
-[ext_resource path="res://menu/fonts/normal_font.tres" type="FontFile" id=2]
-[ext_resource path="res://menu/DialogSystem.gd" type="Script" id=3]
-[ext_resource path="res://menu/bookFlip2.ogg" type="AudioStream" id=4]
-[ext_resource path="res://menu/xylo.wav" type="AudioStream" id=5]
-[ext_resource path="res://menu/flavortext8.wav" type="AudioStream" id=6]
-[ext_resource path="res://menu/icons/backlog.png" type="Texture2D" id=7]
-[ext_resource path="res://menu/bookClose.ogg" type="AudioStream" id=8]
-[ext_resource path="res://menu/bookFlipLong.ogg" type="AudioStream" id=9]
-[ext_resource path="res://menu/harmonica.wav" type="AudioStream" id=10]
+[ext_resource type="Texture2D" uid="uid://b1yb3jegxlofu" path="res://characters/portraits.png" id="1"]
+[ext_resource type="Script" path="res://menu/DialogSystem.gd" id="3"]
+[ext_resource type="LabelSettings" uid="uid://gnhfyk5xbqs7" path="res://menu/fonts/mini_font.tres" id="3_i1ghp"]
+[ext_resource type="AudioStream" uid="uid://db4n5vvqyycd1" path="res://menu/bookFlip2.ogg" id="4"]
+[ext_resource type="Texture2D" uid="uid://ca0saugl2e4jt" path="res://menu/icons/backlog.png" id="7"]
+[ext_resource type="AudioStream" uid="uid://4jodxbieljjx" path="res://menu/bookClose.ogg" id="8"]
+[ext_resource type="AudioStream" uid="uid://qclp347lybu5" path="res://menu/bookFlipLong.ogg" id="9"]
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 2, 2, 28, 28 )
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("1")
+region = Rect2(2, 2, 28, 28)
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 length = 0.001
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "ready"
 length = 0.6
-loop = true
 step = 0.3
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("ArrowNext:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.3, 0.6 ),
-"transitions": PackedFloat32Array( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Vector2( 0, 4 ), Vector2( 0, 0 ), Vector2( 0, 4 ) ]
+"values": [Vector2(0, 4), Vector2(0, 0), Vector2(0, 4)]
 }
 
-[sub_resource type="AudioStreamRandomizer" id=6]
-audio_stream = ExtResource( 5 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0n4ve"]
+_data = {
+"RESET": SubResource("3"),
+"ready": SubResource("4")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="6"]
 random_pitch = 1.05
 
-[sub_resource type="AudioStreamRandomizer" id=8]
-audio_stream = ExtResource( 10 )
+[sub_resource type="AudioStreamRandomizer" id="8"]
 random_pitch = 1.05
 
-[sub_resource type="AudioStreamRandomizer" id=7]
-audio_stream = ExtResource( 6 )
+[sub_resource type="AudioStreamRandomizer" id="7"]
 random_pitch = 1.05
 
 [node name="DialogSystem" type="PanelContainer"]
@@ -53,7 +52,7 @@ offset_left = 4.0
 offset_top = 6.0
 offset_right = 252.0
 offset_bottom = 42.0
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_left = 4.0
@@ -64,48 +63,49 @@ offset_bottom = 32.0
 [node name="Portrait" type="TextureRect" parent="HBoxContainer"]
 offset_right = 28.0
 offset_bottom = 28.0
-texture = SubResource( 5 )
+texture = SubResource("5")
 
 [node name="Message" type="Label" parent="HBoxContainer"]
 offset_left = 32.0
-offset_right = 224.0
+offset_right = 236.0
 offset_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 text = "Beep, beep, I'm a sheep?"
-autowrap = true
 
 [node name="ArrowMargin" type="Control" parent="HBoxContainer"]
-offset_left = 228.0
+layout_mode = 3
+anchors_preset = 0
+offset_left = 240.0
 offset_right = 240.0
 offset_bottom = 28.0
-minimum_size = Vector2( 12, 0 )
 
 [node name="ArrowNext" type="Line2D" parent="."]
-position = Vector2( 0, 4 )
-points = PackedVector2Array( 234, 20, 242, 20, 238, 24, 234, 20 )
+position = Vector2(0, 4)
+points = PackedVector2Array(234, 20, 242, 20, 238, 24, 234, 20)
 width = 4.0
-default_color = Color( 1, 1, 1, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 autoplay = "ready"
-anims/RESET = SubResource( 3 )
-anims/ready = SubResource( 4 )
+libraries = {
+"": SubResource("AnimationLibrary_0n4ve")
+}
 
 [node name="Next" type="Node2D" parent="."]
 
 [node name="Touch" type="TextureButton" parent="Next"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -4.0
 offset_top = -6.0
 offset_right = 252.0
 offset_bottom = 138.0
-minimum_size = Vector2( 256, 144 )
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -115,72 +115,66 @@ offset_top = -4.0
 offset_right = 228.0
 offset_bottom = 2.0
 text = "Super Note"
-valign = 1
+label_settings = ExtResource("3_i1ghp")
 
 [node name="Backlog" type="TextureButton" parent="Node2D"]
 offset_left = 230.0
 offset_top = 2.0
 offset_right = 246.0
 offset_bottom = 18.0
-minimum_size = Vector2( 16, 16 )
-texture_normal = ExtResource( 7 )
-expand = true
+texture_normal = ExtResource("7")
 stretch_mode = 3
 
 [node name="History" type="PanelContainer" parent="Node2D"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -116.0
 offset_right = 248.0
 offset_bottom = -49.0
-minimum_size = Vector2( 248, 108 )
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Lines" type="ScrollContainer" parent="Node2D/History"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 244.0
-offset_bottom = 104.0
-scroll_horizontal_enabled = false
 
 [node name="Text" type="Label" parent="Node2D/History/Lines"]
-offset_right = 240.0
-offset_bottom = 6.0
+offset_right = 162.0
+offset_bottom = 18.0
 size_flags_horizontal = 3
 text = "--- DIALOGUE HISTORY ---"
-autowrap = true
 
 [node name="Close" type="AudioStreamPlayer" parent="Node2D/History"]
-stream = ExtResource( 8 )
-bus = "Sound effects"
+stream = ExtResource("8")
+bus = &"Sound effects"
 
 [node name="Open" type="AudioStreamPlayer" parent="Node2D/History"]
-stream = ExtResource( 9 )
-bus = "Sound effects"
+stream = ExtResource("9")
+bus = &"Sound effects"
 
 [node name="CharTimer" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="NextLine" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 4 )
-bus = "Sound effects"
+stream = ExtResource("4")
+bus = &"Sound effects"
 
 [node name="Bleeps" type="Node" parent="."]
 
 [node name="SN" type="AudioStreamPlayer" parent="Bleeps"]
-stream = SubResource( 6 )
+stream = SubResource("6")
 volume_db = -6.0
-bus = "Sound effects"
+bus = &"Sound effects"
 
 [node name="AN" type="AudioStreamPlayer" parent="Bleeps"]
-stream = SubResource( 8 )
+stream = SubResource("8")
 volume_db = -6.0
-bus = "Sound effects"
+bus = &"Sound effects"
 
 [node name="FlavorText" type="AudioStreamPlayer" parent="Bleeps"]
-stream = SubResource( 7 )
+stream = SubResource("7")
 volume_db = -6.0
-bus = "Sound effects"
+bus = &"Sound effects"
 
 [connection signal="visibility_changed" from="." to="." method="_on_DialogBox_visibility_changed"]
 [connection signal="pressed" from="Next/Touch" to="." method="_on_next_pressed"]

@@ -1,18 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bc8h68mqctwdf"]
+[gd_scene load_steps=12 format=3 uid="uid://bc8h68mqctwdf"]
 
-[ext_resource type="PackedScene" path="res://characters/Character.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://5l3ywyc02vos" path="res://characters/Character.tscn" id="1"]
 [ext_resource type="Script" path="res://characters/Player.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dp5u3xmlxy7kj" path="res://characters/super_note.png" id="3"]
 [ext_resource type="AudioStream" uid="uid://uy08jnbyeyns" path="res://characters/wood_block_strike.wav" id="5"]
-[ext_resource type="FontFile" uid="uid://8d8eprmr2jux" path="res://menu/fonts/Kenney Mini.ttf" id="5_lmapn"]
+[ext_resource type="LabelSettings" uid="uid://gnhfyk5xbqs7" path="res://menu/fonts/mini_font.tres" id="5_706y7"]
 [ext_resource type="Material" path="res://menu/unshaded.material" id="6"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_kekpv"]
-line_spacing = -3.0
-font = ExtResource("5_lmapn")
-font_size = 8
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -131,17 +124,9 @@ _data = {
 collision_layer = 2
 script = ExtResource("2")
 is_playable = true
-actor_name = "Super Note"
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3")
-
-[node name="StepSmoke" parent="." index="3"]
-scale_amount_min = 2.0
-scale_amount_max = 6.0
-
-[node name="StepSound" parent="." index="4"]
-bus = &"Sound effects"
 
 [node name="Tutorial" type="Label" parent="." index="5"]
 material = ExtResource("6")
@@ -151,7 +136,7 @@ offset_right = 60.0
 offset_bottom = -24.0
 text = "Tap somewhere or use arrow
 keys to move Super Note!"
-label_settings = SubResource("LabelSettings_kekpv")
+label_settings = ExtResource("5_706y7")
 horizontal_alignment = 1
 
 [node name="WoodBlock" type="AudioStreamPlayer2D" parent="." index="6"]

@@ -1,9 +1,9 @@
-extends "res://props/Interactable.gd"
+extends "res://props/interactable.gd"
 
 signal first_opened
 
-@export (String) var item := "CoolPotion"
-@export (int) var money := 0
+@export var item := "CoolPotion"
+@export var money := 0
 
 
 
