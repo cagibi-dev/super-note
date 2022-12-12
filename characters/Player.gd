@@ -15,10 +15,6 @@ func set_playable(new_playable: bool):
 		create_tween().tween_property($CutsceneBars/Bottom, "offset_top", -bar_height, 0.2)
 
 
-func _ready():
-	target_position = position
-
-
 func _process_input():
 	if not is_playable:
 		return

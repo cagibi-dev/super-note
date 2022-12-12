@@ -35,7 +35,7 @@ func _ready():
 
 func set_money(new_money: int):
 	money = new_money
-	$Money.text = str(money)
+	$TopHUD/Money.text = str(money)
 
 
 func add_to_inventory(item: String):
@@ -67,6 +67,10 @@ func play_music(music: AudioStream):
 	else:
 		music_node.stop()
 		music_node.stream = null
+
+
+func _on_dialog_system_visibility_changed():
+	$TopHUD.visible = not dialog_system.visible
 "
 
 [node name="Globals" type="CanvasLayer"]
@@ -97,7 +101,16 @@ offset_top = 4.0
 offset_right = 144.0
 offset_bottom = 192.0
 
-[node name="Money" type="Label" parent="."]
+[node name="DialogSystem" parent="." instance=ExtResource("3")]
+visible = false
+
+[node name="TopHUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Money" type="Label" parent="TopHUD"]
 offset_left = 16.0
 offset_top = 4.0
 offset_right = 41.0
@@ -105,10 +118,9 @@ offset_bottom = 14.0
 text = "0"
 label_settings = ExtResource("2_83e5f")
 
-[node name="Sprite2D" type="Sprite2D" parent="Money"]
+[node name="Sprite2D" type="Sprite2D" parent="TopHUD/Money"]
 position = Vector2(-7, 6)
 texture = ExtResource("5")
 hframes = 8
 
-[node name="DialogSystem" parent="." instance=ExtResource("3")]
-visible = false
+[connection signal="visibility_changed" from="DialogSystem" to="." method="_on_dialog_system_visibility_changed"]

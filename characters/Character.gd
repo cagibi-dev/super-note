@@ -1,14 +1,25 @@
 extends CharacterBody2D
 class_name Character
 
+# when the chara finished their turn in battle, emit this.
+signal finished_acting
 
 @export var character_name := "Generic character"
-@export var target_position := position
+@export var target_position: Vector2
 @export var max_speed := 60.0
-@export var vibe := 12
+@export var max_vibe := 12
+@export var attack := 4
+
+var vibe := max_vibe: set = set_vibe
 
 @onready var anim_node: AnimationPlayer = $Anim
 @onready var sprite_node: Sprite2D = $Sprite2D
+@onready var vibe_bar_node: TextureProgressBar = $Vibe
+
+
+func _ready():
+	if target_position.is_zero_approx():
+		target_position = position
 
 
 func _process_input():
@@ -47,3 +58,11 @@ func _physics_process(_delta: float):
 	set_velocity(velocity)
 	move_and_slide()
 	velocity = velocity
+
+
+func set_vibe(new_vibe: int):
+	vibe = new_vibe
+	vibe_bar_node.visible = vibe > 0 and vibe < max_vibe
+	if vibe_bar_node and is_inside_tree():
+		vibe_bar_node.max_value = max_vibe
+		create_tween().tween_property(vibe_bar_node, "value", float(vibe), 0.5)

@@ -15,10 +15,10 @@ enum Face {
 @export var character_step := 2
 
 @onready var msg_node: Label = $Rows/HBoxContainer/Message
-@onready var name_node: Label = $Rows/HBoxContainer2/Name
+@onready var name_node: Label = $OutOfBox/BoxHeader/Name
 @onready var portrait_node: TextureRect = $Rows/HBoxContainer/Portrait
 @onready var talk_sound: AudioStreamPlayer = $Bleeps/SN
-@onready var arrow_node: CanvasItem = $Rows/HBoxContainer2/ArrowNext
+@onready var arrow_node: CanvasItem = $OutOfBox/BoxHeader/ArrowNext
 
 
 class Line:
@@ -43,7 +43,7 @@ func start_line():
 	msg_node.text = new_line.text
 
 	# add line to backlog
-	$Node2D/History/Lines/Text.text += "\n" + new_line.text
+	$OutOfBox/History/Lines/Text.text += "\n" + new_line.text
 
 	name_node.text = new_line.name
 	talk_sound = $Bleeps/FlavorText
@@ -98,13 +98,13 @@ func _on_DialogBox_visibility_changed():
 
 
 func _on_Backlog_pressed():
-	if $Node2D/History.visible:
-		$Node2D/History/Close.play()
+	if $OutOfBox/History.visible:
+		$OutOfBox/History/Close.play()
 		$Next/Touch.show()
-		$Node2D/History.hide()
+		$OutOfBox/History.hide()
 		create_tween().tween_property(self, "position", Vector2(4, 6), 0.5)
 	else:
-		$Node2D/History/Open.play()
+		$OutOfBox/History/Open.play()
 		$Next/Touch.hide()
-		$Node2D/History.show()
+		$OutOfBox/History.show()
 		create_tween().tween_property(self, "position", Vector2(4, 120), 0.5)

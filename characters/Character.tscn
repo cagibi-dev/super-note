@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://5l3ywyc02vos"]
+[gd_scene load_steps=21 format=3 uid="uid://5l3ywyc02vos"]
 
 [ext_resource type="PackedScene" path="res://effects/Shadow.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bxcbn3sofwlib" path="res://menu/bar_progress.png" id="2"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://duoqj5yu571vy" path="res://characters/note.png" id="6"]
 [ext_resource type="AudioStream" uid="uid://chjxla45x6wnk" path="res://characters/step3.wav" id="6_h7l6k"]
 [ext_resource type="AudioStream" uid="uid://c87pgdx7c3suw" path="res://characters/step1.wav" id="7"]
+[ext_resource type="AudioStream" uid="uid://b806yijq3g4d4" path="res://characters/footstep_wood_000.ogg" id="10_o7jkl"]
+[ext_resource type="AudioStream" uid="uid://bi37fmjok3xey" path="res://characters/footstep_wood_001.ogg" id="11_tnimv"]
+[ext_resource type="AudioStream" uid="uid://bobtbdssy60go" path="res://characters/footstep_wood_002.ogg" id="12_v3oh1"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 3.5
@@ -16,16 +19,6 @@ radius = 3.5
 [sub_resource type="Curve" id="4"]
 _data = [Vector2(0.19802, 0), 0.0, 0.0, 0, 0, Vector2(0.257426, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.07443, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hkwgr"]
-streams_count = 3
-random_volume_offset_db = 0.0
-stream_0/stream = ExtResource("7")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("5_3emsl")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("6_h7l6k")
-stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -101,7 +94,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("StepSound")
+tracks/2/path = NodePath("StepSounds/Grass")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -122,6 +115,26 @@ _data = {
 "idle": SubResource("3"),
 "walk": SubResource("5")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hkwgr"]
+streams_count = 3
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_3emsl")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_h7l6k")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ukbfj"]
+streams_count = 3
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("10_o7jkl")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_tnimv")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_v3oh1")
+stream_2/weight = 1.0
 
 [node name="Character" type="CharacterBody2D"]
 collision_layer = 0
@@ -153,12 +166,8 @@ scale_amount_min = 2.0
 scale_amount_max = 6.0
 scale_amount_curve = SubResource("4")
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamRandomizer_hkwgr")
-max_distance = 200.0
-bus = &"Sound effects"
-
 [node name="Vibe" type="TextureProgressBar" parent="."]
+visible = false
 z_index = 10
 z_as_relative = false
 material = ExtResource("5")
@@ -177,3 +186,15 @@ autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_nad56")
 }
+
+[node name="StepSounds" type="Node2D" parent="."]
+
+[node name="Grass" type="AudioStreamPlayer2D" parent="StepSounds"]
+stream = SubResource("AudioStreamRandomizer_hkwgr")
+max_distance = 200.0
+bus = &"Sound effects"
+
+[node name="Wood" type="AudioStreamPlayer2D" parent="StepSounds"]
+stream = SubResource("AudioStreamRandomizer_ukbfj")
+max_distance = 200.0
+bus = &"Sound effects"

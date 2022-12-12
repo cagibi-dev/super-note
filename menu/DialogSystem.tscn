@@ -43,6 +43,7 @@ stream_0/stream = ExtResource("12_wq8bc")
 stream_0/weight = 1.0
 
 [node name="DialogSystem" type="PanelContainer"]
+self_modulate = Color(1, 1, 1, 0.627451)
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 4.0
@@ -66,57 +67,21 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Rows" type="VBoxContainer" parent="."]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 132.0
-offset_bottom = 49.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Rows"]
-offset_right = 128.0
-offset_bottom = 12.0
-
-[node name="Name" type="Label" parent="Rows/HBoxContainer2"]
-offset_top = 1.0
-offset_right = 96.0
-offset_bottom = 11.0
-size_flags_horizontal = 3
-text = "Super Note"
-label_settings = ExtResource("3_i1ghp")
-
-[node name="Backlog" type="TextureButton" parent="Rows/HBoxContainer2"]
-offset_left = 100.0
-offset_right = 112.0
-offset_bottom = 12.0
-texture_normal = ExtResource("7")
-stretch_mode = 3
-
-[node name="ArrowNext" type="TextureRect" parent="Rows/HBoxContainer2"]
-offset_left = 116.0
-offset_top = 4.0
-offset_right = 128.0
-offset_bottom = 12.0
-size_flags_vertical = 8
-texture = ExtResource("4_2otjt")
-stretch_mode = 2
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Rows"]
-offset_top = 16.0
-offset_right = 128.0
-offset_bottom = 45.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Portrait" type="TextureRect" parent="Rows/HBoxContainer"]
-offset_right = 28.0
-offset_bottom = 28.0
+layout_mode = 2
 size_flags_vertical = 0
 texture = SubResource("5")
 stretch_mode = 2
 
 [node name="Message" type="Label" parent="Rows/HBoxContainer"]
 custom_minimum_size = Vector2(0, 29)
-offset_left = 32.0
-offset_right = 128.0
-offset_bottom = 29.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Beep beep. This message has three lines."
@@ -124,9 +89,9 @@ label_settings = SubResource("LabelSettings_gmd7g")
 autowrap_mode = 2
 visible_characters_behavior = 1
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="OutOfBox" type="Node2D" parent="."]
 
-[node name="History" type="PanelContainer" parent="Node2D"]
+[node name="History" type="PanelContainer" parent="OutOfBox"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -136,28 +101,48 @@ offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Lines" type="ScrollContainer" parent="Node2D/History"]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 131.0
-offset_bottom = 103.0
+[node name="Lines" type="ScrollContainer" parent="OutOfBox/History"]
+layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="Text" type="Label" parent="Node2D/History/Lines"]
-offset_right = 127.0
-offset_bottom = 10.0
+[node name="Text" type="Label" parent="OutOfBox/History/Lines"]
+layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "--- DIALOGUE HISTORY ---"
 label_settings = ExtResource("3_i1ghp")
 autowrap_mode = 2
 
-[node name="Close" type="AudioStreamPlayer" parent="Node2D/History"]
+[node name="Close" type="AudioStreamPlayer" parent="OutOfBox/History"]
 stream = ExtResource("8")
 bus = &"Sound effects"
 
-[node name="Open" type="AudioStreamPlayer" parent="Node2D/History"]
+[node name="Open" type="AudioStreamPlayer" parent="OutOfBox/History"]
 stream = ExtResource("9")
 bus = &"Sound effects"
+
+[node name="BoxHeader" type="HBoxContainer" parent="OutOfBox"]
+offset_top = -4.0
+offset_right = 136.0
+offset_bottom = 8.0
+
+[node name="Name" type="Label" parent="OutOfBox/BoxHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Super Note"
+label_settings = ExtResource("3_i1ghp")
+
+[node name="ArrowNext" type="TextureRect" parent="OutOfBox/BoxHeader"]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_2otjt")
+stretch_mode = 2
+
+[node name="Backlog" type="TextureButton" parent="OutOfBox/BoxHeader"]
+layout_mode = 2
+texture_normal = ExtResource("7")
+stretch_mode = 3
 
 [node name="CharTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -185,5 +170,5 @@ bus = &"Sound effects"
 
 [connection signal="visibility_changed" from="." to="." method="_on_DialogBox_visibility_changed"]
 [connection signal="pressed" from="Next/Touch" to="." method="_on_next_pressed"]
-[connection signal="pressed" from="Rows/HBoxContainer2/Backlog" to="." method="_on_Backlog_pressed"]
+[connection signal="pressed" from="OutOfBox/BoxHeader/Backlog" to="." method="_on_Backlog_pressed"]
 [connection signal="timeout" from="CharTimer" to="." method="_on_CharTimer_timeout"]
