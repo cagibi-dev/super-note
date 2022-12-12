@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://l67bmslh5e8k"
+uid="uid://b2h4so5gli2s6"
 path="res://.godot/imported/sewers.ogg-a7c164ff7abe2f79f7517159ef400948.oggvorbisstr"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/sewers.ogg-a7c164ff7abe2f79f7517159ef400948.o
 [params]
 
 loop=true
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=90.0
 beat_count=0
 bar_beats=4

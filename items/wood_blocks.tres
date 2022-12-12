@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bpnnloawxa40p"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_23xan"]
+
+[resource]
+script = ExtResource("1_23xan")
+name = "Wood Blocks"
+description = "Rythmic tools that can entrance anyone."
+is_instrument = true
+can_use_on = 5
+effect = null

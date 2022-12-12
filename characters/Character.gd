@@ -5,16 +5,17 @@ class_name Character
 @export var character_name := "Generic character"
 @export var target_position := position
 @export var max_speed := 60.0
+@export var vibe := 12
 
 @onready var anim_node: AnimationPlayer = $Anim
 @onready var sprite_node: Sprite2D = $Sprite2D
 
 
-func handle_input():
+func _process_input():
 	pass # override this for AI or player input
 
 
-func handle_animation():
+func _process_animation():
 	var new_anim := anim_node.current_animation
 	if velocity.length() > max_speed / 5:
 		new_anim = "walk"
@@ -27,11 +28,11 @@ func handle_animation():
 
 
 func _process(_delta):
-	handle_animation()
+	_process_animation()
 
 
 func _physics_process(_delta: float):
-	handle_input()
+	_process_input()
 
 	var input_vec := Vector2()
 	if (target_position - position).length_squared() > 20.0:

@@ -1,4 +1,4 @@
-extends "res://levels/Level.gd"
+extends "res://levels/level.gd"
 
 
 func _on_BarrelWithInstrument_first_opened():
@@ -6,13 +6,15 @@ func _on_BarrelWithInstrument_first_opened():
 	player_node.is_playable = false
 
 	await get_tree().create_timer(0.5).timeout
+
+	var sn := "Super Note"
 	Globals.dialog_system.start_dialog([
-		{ "text": "With instruments, Super Note is able to communicate!", },
-		{ "name": "Super Note", "portrait": "sn_smile", "text": "Ah, wood blocks. I can sort of talk now.",  },
-		{ "name": "Super Note", "portrait": "sn_squint", "text": "They're a bit old though. I'd say they're about..." },
-		{ "name": "Super Note", "portrait": "sn_shock", "text": "200 years old!?" },
-		{ "name": "Super Note", "portrait": "sn_worry", "text": "Is that really how long I was deactivated...?" },
-		])
+		DialogSystem.Line.new("With instruments, Super Note is able to communicate!"),
+		DialogSystem.Line.new("Ah, wood blocks. I can sort of talk now.", sn, DialogSystem.Face.SN_SMILE),
+		DialogSystem.Line.new("They're a bit old though. I'd say they're about...", sn, DialogSystem.Face.SN_SQUINT),
+		DialogSystem.Line.new("200 years old!?", sn, DialogSystem.Face.SN_SHOCK),
+		DialogSystem.Line.new("Is that really how long I was deactivated...?", sn, DialogSystem.Face.SN_WORRY),
+	])
 	await Globals.dialog_system.dialog_ended
 	Globals.play_music(preload("res://music/sewers.ogg"))
 	player_node.is_playable = true

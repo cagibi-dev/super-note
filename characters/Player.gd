@@ -19,29 +19,20 @@ func _ready():
 	target_position = position
 
 
-func handle_input():
+func _process_input():
 	if not is_playable:
 		return
-	# arrow keys checked PC only
+	# use arrow keys to move while there's no screen touch
 	var arrow_vec := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if not arrow_vec.is_equal_approx(Vector2.ZERO):
+	if not arrow_vec.is_zero_approx():
 		uses_arrows = true
-		$Tutorial.hide()
 	if uses_arrows:
 		target_position = position + arrow_vec * 10
-
-
-func handle_animation():
-	if anim_node.current_animation in ["percuss"]:
-		return
-
-	super.handle_animation()
 
 
 func _unhandled_input(event: InputEvent):
 	if not is_playable:
 		return
 	if event is InputEventScreenTouch and event.is_pressed():
-		$Tutorial.hide()
 		uses_arrows = false
 		target_position = get_viewport().canvas_transform.inverse() * event.position - Vector2.UP * 8

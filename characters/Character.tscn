@@ -1,11 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://5l3ywyc02vos"]
+[gd_scene load_steps=17 format=3 uid="uid://5l3ywyc02vos"]
 
 [ext_resource type="PackedScene" path="res://effects/Shadow.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bxcbn3sofwlib" path="res://menu/bar_progress.png" id="2"]
 [ext_resource type="Script" path="res://characters/Character.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://biwj5byerlkwa" path="res://menu/bar_under.png" id="4"]
 [ext_resource type="Material" path="res://menu/unshaded.material" id="5"]
+[ext_resource type="AudioStream" uid="uid://dw72rhvsim5e0" path="res://characters/step2.wav" id="5_3emsl"]
 [ext_resource type="Texture2D" uid="uid://duoqj5yu571vy" path="res://characters/note.png" id="6"]
+[ext_resource type="AudioStream" uid="uid://chjxla45x6wnk" path="res://characters/step3.wav" id="6_h7l6k"]
 [ext_resource type="AudioStream" uid="uid://c87pgdx7c3suw" path="res://characters/step1.wav" id="7"]
 
 [sub_resource type="CircleShape2D" id="1"]
@@ -14,6 +16,16 @@ radius = 3.5
 [sub_resource type="Curve" id="4"]
 _data = [Vector2(0.19802, 0), 0.0, 0.0, 0, 0, Vector2(0.257426, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.07443, 0.0, 0, 0]
 point_count = 3
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hkwgr"]
+streams_count = 3
+random_volume_offset_db = 0.0
+stream_0/stream = ExtResource("7")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_3emsl")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_h7l6k")
+stream_2/weight = 1.0
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -142,11 +154,13 @@ scale_amount_max = 6.0
 scale_amount_curve = SubResource("4")
 
 [node name="StepSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7")
+stream = SubResource("AudioStreamRandomizer_hkwgr")
 max_distance = 200.0
 bus = &"Sound effects"
 
 [node name="Vibe" type="TextureProgressBar" parent="."]
+z_index = 10
+z_as_relative = false
 material = ExtResource("5")
 offset_left = -8.0
 offset_top = -1.0

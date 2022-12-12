@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://64aj8s4045h6"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_fc3qa"]
+
+[resource]
+script = ExtResource("1_fc3qa")
+name = "Groove Potion"
+description = "Give 10 Vibe to an ally."
+can_use_on = 3
+effect = null

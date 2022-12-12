@@ -3,34 +3,33 @@ class_name DialogSystem
 
 signal dialog_ended
 
+enum Face {
+	NONE, SN_SMILE, SN_SQUINT, SN_SHOCK, SN_WORRY, SN_SAD, SN_GRIN, SN_THINK,
+	AN_NEUTRAL, AN_SMILE, AN_FEAR, AN_HUH, AN_SAD, AN_ANGRY, U1, U2,
+	EK_NEUTRAL, EK_SMILE,
+}
+
 # Each line is a Dict with keys: name?, text, portrait?
 # all of them String values
-@export var lines := []
+@export var lines: Array = []
 @export var character_step := 2
 
-@onready var msg_node: Label = $HBoxContainer/Message
-@onready var name_node: Label = $Node2D/Name
-@onready var portrait_node: TextureRect = $HBoxContainer/Portrait
+@onready var msg_node: Label = $Rows/HBoxContainer/Message
+@onready var name_node: Label = $Rows/HBoxContainer2/Name
+@onready var portrait_node: TextureRect = $Rows/HBoxContainer/Portrait
 @onready var talk_sound: AudioStreamPlayer = $Bleeps/SN
+@onready var arrow_node: CanvasItem = $Rows/HBoxContainer2/ArrowNext
 
 
-func portrait(face_name: String) -> Vector2:
-	# converts portrait string to cell vector.
-	match face_name:
-		"sn_smile": return Vector2(0, 0)
-		"sn_squint": return Vector2(1, 0)
-		"sn_shock": return Vector2(2, 0)
-		"sn_worry": return Vector2(3, 0)
-		"sn_sad": return Vector2(4, 0)
-		"sn_grin": return Vector2(5, 0)
-		"sn_think": return Vector2(6, 0)
-		"an_neutral": return Vector2(0, 1)
-		"an_smile": return Vector2(1, 1)
-		"an_panic": return Vector2(2, 1)
-		"an_think": return Vector2(3, 1)
-		"an_sad": return Vector2(4, 1)
-		"an_angry": return Vector2(5, 1)
-	return Vector2(0, 0)
+class Line:
+	var name := ""
+	var face := Face.NONE
+	var text := ""
+
+	func _init(_text: String, _name := "", _face := Face.NONE):
+		text = _text
+		name = _name
+		face = _face
 
 
 func start_dialog(new_lines: Array):
@@ -40,41 +39,36 @@ func start_dialog(new_lines: Array):
 
 
 func start_line():
-	var new_line: Dictionary = lines[0]
-	msg_node.text = new_line["text"]
+	var new_line: Line = lines[0]
+	msg_node.text = new_line.text
 
 	# add line to backlog
-	$Node2D/History/Lines/Text.text += "\n" + new_line["text"]
+	$Node2D/History/Lines/Text.text += "\n" + new_line.text
 
-	if new_line.has("name"):
-		name_node.text = new_line["name"]
-		if new_line["name"] == "Super Note":
-			talk_sound = $Bleeps/SN
-		elif new_line["name"] == "Armonica":
-			talk_sound = $Bleeps/AN
-		else:
-			talk_sound = $Bleeps/FlavorText
-	else:
-		name_node.text = ""
-		talk_sound = $Bleeps/FlavorText
+	name_node.text = new_line.name
+	talk_sound = $Bleeps/FlavorText
+	match new_line.name:
+		"Super Note": talk_sound = $Bleeps/SN
+		"Armonica": talk_sound = $Bleeps/AN
 
-	if new_line.has("portrait"):
-		var cell := portrait(new_line["portrait"])
+	if new_line.face != Face.NONE:
+		@warning_ignore(integer_division)
+		var cell := Vector2i(new_line.face % 8, new_line.face / 8)
 		portrait_node.show()
-		portrait_node.texture.region.position.x = 2 + 32 * cell.x
-		portrait_node.texture.region.position.y = 2 + 32 * cell.y
+		portrait_node.texture.region.position.x = 28 * cell.x
+		portrait_node.texture.region.position.y = 28 * cell.y
 	else:
 		portrait_node.hide()
-	msg_node.percent_visible = 0
-	$ArrowNext.hide()
+	msg_node.visible_characters = 0
+	arrow_node.hide()
 	$CharTimer.start()
 
 
 func _on_next_pressed():
-	if msg_node.percent_visible < 1:
+	if msg_node.visible_ratio < 1:
 		# just skip text
-		msg_node.percent_visible = 1
-		$ArrowNext.show()
+		msg_node.visible_ratio = 1
+		arrow_node.show()
 		$CharTimer.stop()
 		return
 
@@ -92,8 +86,8 @@ func _on_next_pressed():
 func _on_CharTimer_timeout():
 	msg_node.visible_characters += character_step
 	talk_sound.play()
-	if msg_node.percent_visible >= 1:
-		$ArrowNext.show()
+	if msg_node.visible_ratio >= 1:
+		arrow_node.show()
 		$CharTimer.stop()
 
 

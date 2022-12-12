@@ -23,11 +23,17 @@ _global_script_classes=[{
 "class": &"EncounterCharacter",
 "language": &"GDScript",
 "path": "res://characters/EncounterCharacter.gd"
+}, {
+"base": "Resource",
+"class": &"Item",
+"language": &"GDScript",
+"path": "res://items/item.gd"
 }]
 _global_script_class_icons={
 "Character": "",
 "DialogSystem": "",
-"EncounterCharacter": ""
+"EncounterCharacter": "",
+"Item": ""
 }
 
 [application]
@@ -41,7 +47,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Globals.tscn"
+Globals="*res://globals.tscn"
 
 [debug]
 
@@ -104,7 +110,6 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_1="ground"
 2d_physics/layer_2="player"
 2d_physics/layer_3="danger"
-2d_physics/layer_4="percussion"
 
 [physics]
 

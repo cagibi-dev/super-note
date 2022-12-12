@@ -2,9 +2,8 @@ extends "res://props/interactable.gd"
 
 signal first_opened
 
-@export var item := "CoolPotion"
+@export var item: Item = null
 @export var money := 0
-
 
 
 func say(line: Dictionary):
@@ -30,11 +29,11 @@ func _on_1_pressed():
 		await get_tree().create_timer(0.5).timeout
 		actions_node.get_child(0).text = "Close"
 
-		if item != "":
+		if item != null:
 			$Item.play()
-			say({ "text": "You found %s!" % item })
+			say({ "text": "You found %s!" % item.name })
 			Globals.add_to_inventory(item)
-			item = ""
+			item = null
 		elif money > 0:
 			$Coins.play()
 			say({ "text": "You found %s sonats!" % money })
