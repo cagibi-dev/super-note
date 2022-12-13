@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dgvjpi0uaqhhl"]
+[gd_scene load_steps=14 format=3 uid="uid://dgvjpi0uaqhhl"]
 
 [ext_resource type="Script" path="res://bullet_board/bullet_board.gd" id="1_5a1yd"]
 [ext_resource type="Shader" path="res://bullet_board/plasma.gdshader" id="1_5d8pp"]
 [ext_resource type="Texture2D" uid="uid://b68u6mngmdyk2" path="res://effects/light_texture.tres" id="2_6vdjy"]
 [ext_resource type="Texture2D" uid="uid://dwjx58mg1os3m" path="res://bullet_board/noise_tex.tres" id="2_obkpb"]
 [ext_resource type="Shader" path="res://bullet_board/plasma_circle.gdshader" id="2_s3ngv"]
+[ext_resource type="AudioStream" uid="uid://jq4fwvg5q2i0" path="res://props/hit_lamp.wav" id="6_ft70a"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_sklu5"]
 radius = 64.0
@@ -114,5 +115,9 @@ metadata/_edit_lock_ = true
 position = Vector2(60, 96)
 shape = SubResource("RectangleShape2D_5ama5")
 metadata/_edit_lock_ = true
+
+[node name="Hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ft70a")
+bus = &"Sound effects"
 
 [connection signal="body_entered" from="Rect/VibeLine" to="." method="_on_vibe_line_body_entered"]

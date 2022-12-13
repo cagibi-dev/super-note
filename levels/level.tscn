@@ -31,9 +31,6 @@ z_index = 10
 position = Vector2(72, 96)
 current = true
 limit_left = 0
-limit_top = -999
-limit_right = 144
-limit_bottom = 192
 editor_draw_limits = true
 metadata/_edit_lock_ = true
 

@@ -1,8 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl70d0bvky6wv"]
+[gd_scene load_steps=6 format=3 uid="uid://cl70d0bvky6wv"]
 
 [ext_resource type="Script" path="res://bullet_board/bullet.gd" id="1_6q56s"]
+[ext_resource type="AudioStream" uid="uid://bdbr5y11ovonk" path="res://bullet_board/throw.ogg" id="2_5wofg"]
 
-[sub_resource type="Animation" id="Animation_3nrps"]
+[sub_resource type="Animation" id="Animation_xt0gy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointyBit:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vppib"]
 resource_name = "spin"
 length = 0.8
 loop_mode = 1
@@ -20,25 +36,10 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(-1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_b5kml"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PointyBit:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xyae7"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rfpra"]
 _data = {
-"RESET": SubResource("Animation_b5kml"),
-"spin": SubResource("Animation_3nrps")
+"RESET": SubResource("Animation_xt0gy"),
+"spin": SubResource("Animation_vppib")
 }
 
 [node name="Bullet" type="RigidBody2D"]
@@ -65,8 +66,13 @@ metadata/_edit_lock_ = true
 [node name="Anim" type="AnimationPlayer" parent="."]
 autoplay = "spin"
 libraries = {
-"": SubResource("AnimationLibrary_xyae7")
+"": SubResource("AnimationLibrary_rfpra")
 }
+
+[node name="Spawn" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_5wofg")
+autoplay = true
+bus = &"Sound effects"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

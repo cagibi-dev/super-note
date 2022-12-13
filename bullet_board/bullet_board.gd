@@ -33,6 +33,7 @@ func _on_bullet_destroyed(pos: Vector2):
 
 
 func _on_vibe_line_body_entered(bullet: PhysicsBody2D):
+	$Hurt.play()
 	shake_screen()
 	emit_signal("hurt")
 	# the bullet is now out of range

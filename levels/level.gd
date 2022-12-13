@@ -2,7 +2,7 @@ extends Node2D
 
 
 @export var music: AudioStream = null
-const ROOM_SIZE := Vector2(180, 240)
+const ROOM_SIZE := Vector2(144, 192)
 const WALKOUT_OFFSET := 32
 const TRANSITION_DURATION := 0.75
 
@@ -38,7 +38,14 @@ func dialog():
 
 
 func move_camera(relative: Vector2):
-	cam_node.position += relative
+	print("move", relative)
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property(cam_node, "position", cam_node.position + relative, TRANSITION_DURATION)
+	#cam_node.limit_left += int(relative.x)
+	#cam_node.limit_right += int(relative.x)
+	#cam_node.limit_top += int(relative.y)
+	#cam_node.limit_bottom += int(relative.y)
 
 
 func _on_go_left_body_entered(_body):

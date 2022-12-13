@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://bfgpoil2dpxc"
+uid="uid://cl7vy0x48qd0l"
 path="res://.godot/imported/door_close_02.ogg-58c2ba08ba4139913ae3d8870cd10117.oggvorbisstr"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/door_close_02.ogg-58c2ba08ba4139913ae3d8870cd
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
