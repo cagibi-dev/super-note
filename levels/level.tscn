@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl2u3qe6wfepg"]
+[gd_scene load_steps=5 format=3 uid="uid://dl2u3qe6wfepg"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_gnbpn"]
 [ext_resource type="TileSet" uid="uid://bphakjcw1ygwo" path="res://tileset/tileset.tres" id="2_3v6hf"]
+[ext_resource type="Material" path="res://menu/unshaded.material" id="3_cmfr5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04mfp"]
+size = Vector2(24, 240)
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -26,6 +30,106 @@ metadata/_edit_lock_ = true
 z_index = 10
 position = Vector2(72, 96)
 current = true
+limit_left = 0
+limit_top = -999
+limit_right = 144
 limit_bottom = 192
 editor_draw_limits = true
 metadata/_edit_lock_ = true
+
+[node name="GoLeft" type="Area2D" parent="Camera2D"]
+position = Vector2(-72, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoLeft"]
+shape = SubResource("RectangleShape2D_04mfp")
+metadata/_edit_lock_ = true
+
+[node name="GoRight" type="Area2D" parent="Camera2D"]
+position = Vector2(72, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoRight"]
+shape = SubResource("RectangleShape2D_04mfp")
+metadata/_edit_lock_ = true
+
+[node name="GoUp" type="Area2D" parent="Camera2D"]
+position = Vector2(0, -96)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoUp"]
+shape = SubResource("RectangleShape2D_04mfp")
+metadata/_edit_lock_ = true
+
+[node name="GoDown" type="Area2D" parent="Camera2D"]
+position = Vector2(0, 96)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="Shape" type="CollisionShape2D" parent="Camera2D/GoDown"]
+shape = SubResource("RectangleShape2D_04mfp")
+metadata/_edit_lock_ = true
+
+[node name="Frames" type="Node2D" parent="."]
+z_index = 100
+material = ExtResource("3_cmfr5")
+metadata/_edit_lock_ = true
+
+[node name="Frame" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(144, 0)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame2" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(0, 192)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame3" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(288, 192)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame4" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(144, 384)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame5" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(432, 384)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame6" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(576, 192)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[node name="Frame7" type="Line2D" parent="Frames"]
+use_parent_material = true
+position = Vector2(432, 0)
+points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
+width = 2.0
+default_color = Color(0, 1, 0, 1)
+
+[connection signal="body_entered" from="Camera2D/GoLeft" to="." method="_on_go_left_body_entered"]
+[connection signal="body_entered" from="Camera2D/GoRight" to="." method="_on_go_right_body_entered"]
+[connection signal="body_entered" from="Camera2D/GoUp" to="." method="_on_go_up_body_entered"]
+[connection signal="body_entered" from="Camera2D/GoDown" to="." method="_on_go_down_body_entered"]

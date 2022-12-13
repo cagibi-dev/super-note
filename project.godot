@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Super Note and the Golden Record"
 config/description="Overcome your enemies by playing music in this small RPG prototype!"
-run/main_scene="res://levels/level.tscn"
+run/main_scene="res://levels/sewers/level_sewers.tscn"
 config/features=PackedStringArray("4.0")
 run/max_fps=30
 config/icon="res://icon.png"
@@ -51,6 +51,7 @@ Globals="*res://globals.tscn"
 
 [debug]
 
+settings/stdout/print_gpu_profile=true
 gdscript/warnings/return_value_discarded=false
 
 [display]

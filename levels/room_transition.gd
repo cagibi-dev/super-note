@@ -1,7 +1,7 @@
 extends Area2D
 
 
-@export (String, FILE, "*.tscn") var destination
+@export_file("*.tscn") var destination: String
 
 
 func _on_body_entered(body: Node2D):

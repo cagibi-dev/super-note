@@ -10,19 +10,20 @@ const TRANSITION_DURATION := 0.75
 
 
 func _enter_tree():
+	$Frames.hide()
 	Globals.play_music(music)
-
-
-func _ready():
-	print(Globals.party[0])
 	for hero in Globals.party:
 		add_child(hero)
-	pass # dialog()
+
+
+func _exit_tree():
+	for hero in Globals.party:
+		remove_child(hero)
 
 
 func dialog():
 	for hero in Globals.party:
-		hero.is_playable = false
+		hero.can_move = false
 	var sn := "Super Note"
 	Globals.dialog_system.start_dialog([
 		DialogSystem.Line.new("With instruments, Super Note is able to communicate!"),
@@ -33,4 +34,24 @@ func dialog():
 	])
 	await Globals.dialog_system.dialog_ended
 	for hero in Globals.party:
-		hero.is_playable = true
+		hero.can_move = true
+
+
+func move_camera(relative: Vector2):
+	cam_node.position += relative
+
+
+func _on_go_left_body_entered(_body):
+	move_camera(Vector2(-ROOM_SIZE.x, 0))
+
+
+func _on_go_right_body_entered(_body):
+	move_camera(Vector2(ROOM_SIZE.x, 0))
+
+
+func _on_go_up_body_entered(_body):
+	move_camera(Vector2(0, -ROOM_SIZE.y))
+
+
+func _on_go_down_body_entered(_body):
+	move_camera(Vector2(0, ROOM_SIZE.y))

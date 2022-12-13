@@ -121,7 +121,7 @@ _data = {
 [node name="SuperNote" instance=ExtResource("1")]
 collision_layer = 2
 script = ExtResource("2")
-is_playable = true
+can_move = true
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3")

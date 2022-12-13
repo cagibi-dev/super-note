@@ -21,13 +21,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TopMargin" type="ColorRect" parent="AdaptativeStretcher"]
-layout_mode = 2
+offset_right = 144.0
 size_flags_vertical = 3
 color = Color(0.105882, 0.14902, 0.196078, 1)
 
 [node name="WindowPadder" type="Control" parent="AdaptativeStretcher"]
 custom_minimum_size = Vector2(0, 188)
-layout_mode = 2
+layout_mode = 3
+anchors_preset = 0
+offset_top = 4.0
+offset_right = 144.0
+offset_bottom = 192.0
 
 [node name="DialogSystem" parent="." instance=ExtResource("3")]
 visible = false
@@ -39,7 +43,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Money" type="Label" parent="TopHUD"]
-layout_mode = 0
 offset_left = 16.0
 offset_top = 4.0
 offset_right = 41.0

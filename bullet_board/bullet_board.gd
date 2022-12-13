@@ -23,7 +23,6 @@ func spawn_bullets():
 	$Rect/VibeLine.hide()
 	create_tween().set_trans(Tween.TRANS_SINE).tween_property($Rect, "scale:x", 0, 0.2)
 	emit_signal("done")
-	#queue_free()
 
 
 func _on_bullet_destroyed(pos: Vector2):
