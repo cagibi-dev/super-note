@@ -12,6 +12,6 @@ void fragment() {
 	float noise_sample = texture(noiseTexture, noise_uv).r;
 	float x_offset = noise_sample * variation - variation / 2.0;
 	COLOR = texture(color_gradient,
-		vec2((UV.x-0.5)/width + 0.5 + x_offset/width,
-		UV.y));
+		vec2((2.0 * distance(vec2(0.5), UV) - 0.75)/width + 0.5 + x_offset/width,
+		0.0));
 }

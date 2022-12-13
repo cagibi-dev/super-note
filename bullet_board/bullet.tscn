@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl70d0bvky6wv"]
+
+[ext_resource type="Script" path="res://bullet_board/bullet.gd" id="1_6q56s"]
+
+[sub_resource type="Animation" id="Animation_3nrps"]
+resource_name = "spin"
+length = 0.8
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointyBit:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(-1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b5kml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointyBit:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xyae7"]
+_data = {
+"RESET": SubResource("Animation_b5kml"),
+"spin": SubResource("Animation_3nrps")
+}
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 4
+input_pickable = true
+lock_rotation = true
+script = ExtResource("1_6q56s")
+
+[node name="PointyBit" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 16, -8, 4, 8, 4)
+metadata/_edit_lock_ = true
+
+[node name="Tail" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 16, -4, -12, 4, -12)
+metadata/_edit_lock_ = true
+
+[node name="Shape" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(4, -12, 8, 4, 0, 16, -8, 4, -4, -12)
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+libraries = {
+"": SubResource("AnimationLibrary_xyae7")
+}
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

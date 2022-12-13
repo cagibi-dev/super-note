@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dgvjpi0uaqhhl"]
+[gd_scene load_steps=13 format=3 uid="uid://dgvjpi0uaqhhl"]
 
+[ext_resource type="Script" path="res://bullet_board/bullet_board.gd" id="1_5a1yd"]
 [ext_resource type="Shader" path="res://bullet_board/plasma.gdshader" id="1_5d8pp"]
 [ext_resource type="Texture2D" uid="uid://b68u6mngmdyk2" path="res://effects/light_texture.tres" id="2_6vdjy"]
 [ext_resource type="Texture2D" uid="uid://dwjx58mg1os3m" path="res://bullet_board/noise_tex.tres" id="2_obkpb"]
+[ext_resource type="Shader" path="res://bullet_board/plasma_circle.gdshader" id="2_s3ngv"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_sklu5"]
 radius = 64.0
@@ -12,22 +14,37 @@ rings = 12
 
 [sub_resource type="Gradient" id="Gradient_4rqo8"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.239316, 0.34188, 0.504274, 0.700855, 0.82906)
-colors = PackedColorArray(0, 0, 0, 1, 0, 0.290784, 1, 1, 0.911179, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0.720786, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.17094, 0.34188, 0.504274, 0.700855, 0.897436)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.302207, 1, 1, 0.911179, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0.720786, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_g1swx"]
 gradient = SubResource("Gradient_4rqo8")
-width = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6h7ay"]
+shader = ExtResource("2_s3ngv")
+shader_parameter/color_gradient = SubResource("GradientTexture1D_g1swx")
+shader_parameter/noiseTexture = ExtResource("2_obkpb")
+shader_parameter/speed = 0.2
+shader_parameter/variation = 0.1
+shader_parameter/width = 0.25
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_la5rw"]
+a = Vector2(-48, 1)
+b = Vector2(48, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3phut"]
 shader = ExtResource("1_5d8pp")
 shader_parameter/color_gradient = SubResource("GradientTexture1D_g1swx")
 shader_parameter/noiseTexture = ExtResource("2_obkpb")
-shader_parameter/speed = 0.1
-shader_parameter/variation = 0.2
-shader_parameter/width = 0.2
+shader_parameter/speed = 0.2
+shader_parameter/variation = 0.1
+shader_parameter/width = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ama5"]
+size = Vector2(22, 216)
 
 [node name="BulletBoard" type="Node2D"]
+script = ExtResource("1_5a1yd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -48,21 +65,54 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(72, 120)
 mesh = SubResource("SphereMesh_sklu5")
 
+[node name="VibeDisk" type="Sprite2D" parent="Circle"]
+material = SubResource("ShaderMaterial_6h7ay")
+position = Vector2(72, 120)
+scale = Vector2(2, 2)
+texture = ExtResource("2_6vdjy")
+
 [node name="Rect" type="Node2D" parent="."]
+position = Vector2(72, 0)
+metadata/_edit_lock_ = true
 
 [node name="Inner" type="Polygon2D" parent="Rect"]
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(24, 48, 120, 48, 120, 204, 24, 204)
+polygon = PackedVector2Array(-48, 48, 48, 48, 48, 204, -48, 204)
+metadata/_edit_lock_ = true
 
-[node name="VibeLine" type="Sprite2D" parent="Rect"]
+[node name="VibeLine" type="Area2D" parent="Rect"]
+position = Vector2(0, 168)
+collision_layer = 2
+collision_mask = 4
+
+[node name="Shape" type="CollisionShape2D" parent="Rect/VibeLine"]
+shape = SubResource("SegmentShape2D_la5rw")
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="Rect/VibeLine"]
 material = SubResource("ShaderMaterial_3phut")
-position = Vector2(72, 168)
 rotation = 1.5708
-scale = Vector2(0.8, 2.3)
+scale = Vector2(0.5, 1.5)
 texture = ExtResource("2_6vdjy")
 metadata/_edit_lock_ = true
 
 [node name="Outer" type="Line2D" parent="Rect"]
-points = PackedVector2Array(24, 48, 120, 48, 120, 204, 24, 204, 24, 48)
+points = PackedVector2Array(-48, 48, 48, 48, 48, 204, -48, 204, -48, 48)
 width = 3.0
 begin_cap_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Boundaries" type="StaticBody2D" parent="Rect"]
+metadata/_edit_lock_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="Rect/Boundaries"]
+position = Vector2(-60, 96)
+shape = SubResource("RectangleShape2D_5ama5")
+metadata/_edit_lock_ = true
+
+[node name="Shape2" type="CollisionShape2D" parent="Rect/Boundaries"]
+position = Vector2(60, 96)
+shape = SubResource("RectangleShape2D_5ama5")
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="Rect/VibeLine" to="." method="_on_vibe_line_body_entered"]

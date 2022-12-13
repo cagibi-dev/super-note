@@ -6,8 +6,8 @@ fractal_type = 2
 fractal_octaves = 3
 
 [resource]
-width = 256
-height = 256
+width = 128
+height = 128
 generate_mipmaps = false
 seamless = true
 noise = SubResource("FastNoiseLite_cejrr")
