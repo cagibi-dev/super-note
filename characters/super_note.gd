@@ -1,4 +1,4 @@
-extends "res://characters/Character.gd"
+extends "res://characters/character.gd"
 
 
 @export var is_playable := true : set = set_playable

@@ -6,7 +6,7 @@ var previous_player_offset := Vector2()
 
 # our heroes
 var party := [
-	preload("res://characters/EncounterHero.tscn").instantiate(),
+	preload("res://characters/super_note.tscn").instantiate(),
 ]
 var inventory := []
 var money := 0 : set = set_money
@@ -60,3 +60,7 @@ func play_music(music: AudioStream):
 	else:
 		music_node.stop()
 		music_node.stream = null
+
+
+func _on_dialog_system_visibility_changed():
+	pass # Replace with function body.

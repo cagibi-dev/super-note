@@ -6,7 +6,6 @@ const ROOM_SIZE := Vector2(180, 240)
 const WALKOUT_OFFSET := 32
 const TRANSITION_DURATION := 0.75
 
-@onready var player_node: Node2D = $Player
 @onready var cam_node: Camera2D = $Camera2D
 
 
@@ -15,7 +14,15 @@ func _enter_tree():
 
 
 func _ready():
-	player_node.is_playable = false
+	print(Globals.party[0])
+	for hero in Globals.party:
+		add_child(hero)
+	pass # dialog()
+
+
+func dialog():
+	for hero in Globals.party:
+		hero.is_playable = false
 	var sn := "Super Note"
 	Globals.dialog_system.start_dialog([
 		DialogSystem.Line.new("With instruments, Super Note is able to communicate!"),
@@ -25,4 +32,5 @@ func _ready():
 		DialogSystem.Line.new("Is that really how long I was deactivated...?", sn, DialogSystem.Face.SN_WORRY),
 	])
 	await Globals.dialog_system.dialog_ended
-	player_node.is_playable = true
+	for hero in Globals.party:
+		hero.is_playable = true

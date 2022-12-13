@@ -1,81 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://def8wkpcmoa1j"]
 
+[ext_resource type="Script" path="res://globals.gd" id="1_3ech8"]
 [ext_resource type="LabelSettings" uid="uid://gnhfyk5xbqs7" path="res://menu/fonts/mini_font.tres" id="2_83e5f"]
 [ext_resource type="PackedScene" uid="uid://btucf3qm7tk60" path="res://menu/DialogSystem.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://8ctb1qxmnji1" path="res://props/sonat.png" id="5"]
 
-[sub_resource type="GDScript" id="GDScript_o6ygd"]
-script/source = "extends Node
-
-
-var previous_room := \"\"
-var previous_player_offset := Vector2()
-
-# our heroes
-var party := [
-	preload(\"res://characters/EncounterHero.tscn\").instantiate(),
-]
-var inventory := []
-var money := 0 : set = set_money
-
-# stuff about encounters apart from our heroes
-var encounter_data := {
-	\"enemies\": [
-		#preload(\"res://enemies/Rat.tscn\").instantiate(),
-	],
-	\"scene\": \"sewers\",
-}
-
-@onready var dialog_system: DialogSystem = $DialogSystem
-
-
-func _ready():
-	get_viewport().size *= 3
-
-
-func set_money(new_money: int):
-	money = new_money
-	$TopHUD/Money.text = str(money)
-
-
-func add_to_inventory(item: String):
-	inventory.append(item)
-	# here be special cases
-
-
-func goto_room(room_name: String):
-	previous_room = get_tree().current_scene.filename
-	get_tree().change_scene_to_file(room_name)
-
-	# teleport player to where it came from + offset
-	await get_tree().idle_frame
-	for transition in get_tree().get_nodes_in_group(\"transition\"):
-		if transition.destination == previous_room:
-			# TODO: use more efficient stuff than groups
-			#var player: Node2D = get_tree().get_nodes_in_group(\"player\")[0]
-			#player.global_position = transition.global_position - previous_player_offset * 1.5
-			break
-
-
-func play_music(music: AudioStream):
-	var music_node: AudioStreamPlayer = $Music
-	if music:
-		if music_node.stream != music:
-			music_node.stop()
-			music_node.stream = music
-			music_node.play()
-	else:
-		music_node.stop()
-		music_node.stream = null
-
-
-func _on_dialog_system_visibility_changed():
-	$TopHUD.visible = not dialog_system.visible
-"
-
 [node name="Globals" type="CanvasLayer"]
 layer = 10
-script = SubResource("GDScript_o6ygd")
+script = ExtResource("1_3ech8")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 volume_db = -6.0
@@ -89,17 +21,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TopMargin" type="ColorRect" parent="AdaptativeStretcher"]
-offset_right = 144.0
+layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.105882, 0.14902, 0.196078, 1)
 
 [node name="WindowPadder" type="Control" parent="AdaptativeStretcher"]
 custom_minimum_size = Vector2(0, 188)
-layout_mode = 3
-anchors_preset = 0
-offset_top = 4.0
-offset_right = 144.0
-offset_bottom = 192.0
+layout_mode = 2
 
 [node name="DialogSystem" parent="." instance=ExtResource("3")]
 visible = false
@@ -111,6 +39,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Money" type="Label" parent="TopHUD"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 4.0
 offset_right = 41.0

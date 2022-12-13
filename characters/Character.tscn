@@ -1,8 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://5l3ywyc02vos"]
+[gd_scene load_steps=21 format=3 uid="uid://djx535xuuhako"]
 
 [ext_resource type="PackedScene" path="res://effects/Shadow.tscn" id="1"]
+[ext_resource type="Script" path="res://characters/character.gd" id="1_usv3s"]
 [ext_resource type="Texture2D" uid="uid://bxcbn3sofwlib" path="res://menu/bar_progress.png" id="2"]
-[ext_resource type="Script" path="res://characters/Character.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://biwj5byerlkwa" path="res://menu/bar_under.png" id="4"]
 [ext_resource type="Material" path="res://menu/unshaded.material" id="5"]
 [ext_resource type="AudioStream" uid="uid://dw72rhvsim5e0" path="res://characters/step2.wav" id="5_3emsl"]
@@ -138,9 +138,9 @@ stream_2/weight = 1.0
 
 [node name="Character" type="CharacterBody2D"]
 collision_layer = 0
-script = ExtResource("3")
+script = ExtResource("1_usv3s")
 
-[node name="Shape3D" type="CollisionShape2D" parent="."]
+[node name="Shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("1")
 
