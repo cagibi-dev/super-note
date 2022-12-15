@@ -4,7 +4,8 @@ signal hurt
 signal done
 
 
-func _ready():
+func _on_first_bullet_destroyed(pos: Vector2):
+	_on_bullet_destroyed(pos)
 	spawn_bullets()
 
 

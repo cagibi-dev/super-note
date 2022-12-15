@@ -28,14 +28,13 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 10
-position = Vector2(72, 96)
+anchor_mode = 0
 current = true
-limit_left = 0
 editor_draw_limits = true
 metadata/_edit_lock_ = true
 
 [node name="GoLeft" type="Area2D" parent="Camera2D"]
-position = Vector2(-72, 0)
+position = Vector2(0, 96)
 collision_layer = 0
 collision_mask = 2
 
@@ -44,7 +43,7 @@ shape = SubResource("RectangleShape2D_04mfp")
 metadata/_edit_lock_ = true
 
 [node name="GoRight" type="Area2D" parent="Camera2D"]
-position = Vector2(72, 0)
+position = Vector2(144, 96)
 collision_layer = 0
 collision_mask = 2
 
@@ -53,7 +52,7 @@ shape = SubResource("RectangleShape2D_04mfp")
 metadata/_edit_lock_ = true
 
 [node name="GoUp" type="Area2D" parent="Camera2D"]
-position = Vector2(0, -96)
+position = Vector2(72, 0)
 rotation = 1.5708
 collision_layer = 0
 collision_mask = 2
@@ -63,7 +62,7 @@ shape = SubResource("RectangleShape2D_04mfp")
 metadata/_edit_lock_ = true
 
 [node name="GoDown" type="Area2D" parent="Camera2D"]
-position = Vector2(0, 96)
+position = Vector2(72, 192)
 rotation = 1.5708
 collision_layer = 0
 collision_mask = 2
@@ -79,49 +78,49 @@ metadata/_edit_lock_ = true
 
 [node name="Frame" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(144, 0)
+position = Vector2(146, -190)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame2" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(0, 192)
+position = Vector2(2, 2)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame3" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(288, 192)
+position = Vector2(290, 2)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame4" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(144, 384)
+position = Vector2(146, 194)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame5" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(432, 384)
+position = Vector2(434, 194)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame6" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(576, 192)
+position = Vector2(578, 2)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
 
 [node name="Frame7" type="Line2D" parent="Frames"]
 use_parent_material = true
-position = Vector2(432, 0)
+position = Vector2(434, -190)
 points = PackedVector2Array(0, 0, 144, 0, 144, 192, 0, 192, 0, 0)
 width = 2.0
 default_color = Color(0, 1, 0, 1)
