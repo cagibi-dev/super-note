@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://bphakjcw1ygwo"]
+[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://bphakjcw1ygwo"]
 
 [ext_resource type="Texture2D" uid="uid://djxnd0ddpgi5s" path="res://tileset/tileset.png" id="1_sr3ok"]
+[ext_resource type="PackedScene" uid="uid://dhan23dpltl0n" path="res://props/chest.tscn" id="2_mrjcc"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_3ia0g"]
 tile_data = PackedInt32Array(0, 983040, 8, 65536, 917504, 6, 1, 983040, 131080, 65537, 917504, 131078)
@@ -923,6 +924,7 @@ texture_region_size = Vector2i(12, 12)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_d4m3w"]
 resource_name = "chests"
+scenes/1/scene = ExtResource("2_mrjcc")
 
 [resource]
 tile_size = Vector2i(12, 12)

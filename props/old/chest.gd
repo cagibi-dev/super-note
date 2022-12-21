@@ -11,13 +11,13 @@ func say(line: Dictionary):
 
 	Globals.dialog_system.start_dialog([line])
 	await Globals.dialog_system.dialog_ended
-	interactor.can_move = true
+	interactor.is_playable = true
 	emit_signal("first_opened")
 
 
 func _on_1_pressed():
 	interactor.target_position = interactor.position
-	interactor.can_move = false
+	interactor.is_playable = false
 
 	# open or close barrel
 	menu_container_node.hide()
@@ -40,11 +40,11 @@ func _on_1_pressed():
 			Globals.money += money
 			money = 0
 		else:
-			interactor.can_move = true
+			interactor.is_playable = true
 	else:
 		# Close
 		$Sprite2D.frame = 0
 		$Close.play()
 		await get_tree().create_timer(0.5).timeout
-		interactor.can_move = true
+		interactor.is_playable = true
 		actions_node.get_child(0).text = "Open"

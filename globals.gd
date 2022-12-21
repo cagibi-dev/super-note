@@ -23,7 +23,8 @@ var encounter_data := {
 
 
 func _ready():
-	get_viewport().size *= 3
+	if not OS.has_feature("mobile"):
+		get_viewport().size *= 4
 
 
 func set_money(new_money: int):

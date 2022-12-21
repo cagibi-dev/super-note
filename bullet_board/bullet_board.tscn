@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgvjpi0uaqhhl"]
+[gd_scene load_steps=15 format=3 uid="uid://dgvjpi0uaqhhl"]
 
 [ext_resource type="Script" path="res://bullet_board/bullet_board.gd" id="1_5a1yd"]
 [ext_resource type="Shader" path="res://bullet_board/plasma.gdshader" id="1_5d8pp"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dwjx58mg1os3m" path="res://bullet_board/noise_tex.tres" id="2_obkpb"]
 [ext_resource type="Shader" path="res://bullet_board/plasma_circle.gdshader" id="2_s3ngv"]
 [ext_resource type="AudioStream" uid="uid://jq4fwvg5q2i0" path="res://props/hit_lamp.wav" id="6_ft70a"]
-[ext_resource type="PackedScene" uid="uid://cl70d0bvky6wv" path="res://bullet_board/bullet.tscn" id="7_eqicw"]
+[ext_resource type="PackedScene" uid="uid://dvvtqfjir7nh" path="res://bullet_board/bullet_avatar.tscn" id="8_rk5eq"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_sklu5"]
 radius = 64.0
@@ -44,9 +44,6 @@ shader_parameter/width = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ama5"]
 size = Vector2(22, 216)
-
-[sub_resource type="LabelSettings" id="LabelSettings_p8ffr"]
-line_spacing = -3.0
 
 [node name="BulletBoard" type="Node2D"]
 script = ExtResource("1_5a1yd")
@@ -86,6 +83,7 @@ polygon = PackedVector2Array(-48, 48, 48, 48, 48, 204, -48, 204)
 metadata/_edit_lock_ = true
 
 [node name="VibeLine" type="Area2D" parent="Rect"]
+z_index = 1
 position = Vector2(0, 168)
 collision_layer = 2
 collision_mask = 4
@@ -108,6 +106,7 @@ begin_cap_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Boundaries" type="StaticBody2D" parent="Rect"]
+collision_mask = 7
 metadata/_edit_lock_ = true
 
 [node name="Shape" type="CollisionShape2D" parent="Rect/Boundaries"]
@@ -124,23 +123,7 @@ metadata/_edit_lock_ = true
 stream = ExtResource("6_ft70a")
 bus = &"Sound effects"
 
-[node name="Bullet" parent="." instance=ExtResource("7_eqicw")]
-position = Vector2(72, 120)
-gravity_scale = 0.0
-angular_velocity = 2.0
-angular_damp_mode = 1
+[node name="BulletAvatar" parent="." instance=ExtResource("8_rk5eq")]
+position = Vector2(72, 168)
 
-[node name="Label" type="Label" parent="Bullet"]
-top_level = true
-z_index = 100
-offset_left = 24.0
-offset_top = 84.0
-offset_right = 120.0
-offset_bottom = 108.0
-text = "TOUCH ARROW
-TO START"
-label_settings = SubResource("LabelSettings_p8ffr")
-horizontal_alignment = 1
-
-[connection signal="body_entered" from="Rect/VibeLine" to="." method="_on_vibe_line_body_entered"]
-[connection signal="destroyed" from="Bullet" to="." method="_on_first_bullet_destroyed"]
+[connection signal="hurt" from="BulletAvatar" to="." method="_on_bullet_avatar_hurt"]

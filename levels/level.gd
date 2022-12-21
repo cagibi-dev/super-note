@@ -23,7 +23,8 @@ func _exit_tree():
 
 func dialog():
 	for hero in Globals.party:
-		hero.can_move = false
+		hero.uses_arrow = false
+		hero.is_playable = false
 	var sn := "Super Note"
 	Globals.dialog_system.start_dialog([
 		DialogSystem.Line.new("With instruments, Super Note is able to communicate!"),
@@ -34,7 +35,7 @@ func dialog():
 	])
 	await Globals.dialog_system.dialog_ended
 	for hero in Globals.party:
-		hero.can_move = true
+		hero.is_playable = true
 
 
 func move_camera(relative: Vector2):
@@ -42,9 +43,8 @@ func move_camera(relative: Vector2):
 	cam_node.position = cam_node.position.snapped(ROOM_SIZE)
 	# then, move it
 	for hero in Globals.party:
-		hero.can_move = false
+		hero.is_playable = false
 		hero.target_position += relative.normalized() * WALKOUT_OFFSET
-	print("move", relative)
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.tween_property(cam_node, "position", cam_node.position + relative, TRANSITION_DURATION)
@@ -54,7 +54,7 @@ func move_camera(relative: Vector2):
 	#cam_node.limit_top += int(relative.y)
 	#cam_node.limit_bottom += int(relative.y)
 	for hero in Globals.party:
-		hero.can_move = true
+		hero.is_playable = true
 
 
 func _on_go_left_body_entered(_body):

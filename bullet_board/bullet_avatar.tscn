@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvvtqfjir7nh"]
+
+[ext_resource type="Script" path="res://bullet_board/bullet_avatar.gd" id="1_avb8h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ty6jd"]
+
+[sub_resource type="Animation" id="Animation_2vw1p"]
+resource_name = "idle"
+length = 1.6
+loop_mode = 1
+step = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 2), Vector2(-1, -2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.996078, 0.494118, 1), Color(0.521569, 1, 0.694118, 1), Color(0.596078, 0.670588, 1, 1), Color(1, 0.709804, 0.65098, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nf2rr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lobmb"]
+_data = {
+"RESET": SubResource("Animation_nf2rr"),
+"idle": SubResource("Animation_2vw1p")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cv872"]
+radius = 6.0
+
+[node name="BulletAvatar" type="RigidBody2D"]
+collision_layer = 0
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 2.0
+script = ExtResource("1_avb8h")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ty6jd")
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(-1, 0)
+polygon = PackedVector2Array(0, 12, 4, 8, 4, 0, 12, 4, 12, -4, 0, -12, 0, 4, -8, 4, -8, 12)
+metadata/_edit_lock_ = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+libraries = {
+"": SubResource("AnimationLibrary_lobmb")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="Shape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_cv872")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

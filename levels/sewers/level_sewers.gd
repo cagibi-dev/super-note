@@ -11,7 +11,7 @@ func _enter_tree():
 
 func _on_BarrelWithInstrument_first_opened():
 	player_node.target_position = player_node.position
-	player_node.can_move = false
+	player_node.is_playable = false
 
 	await get_tree().create_timer(0.5).timeout
 
@@ -25,12 +25,12 @@ func _on_BarrelWithInstrument_first_opened():
 	])
 	await Globals.dialog_system.dialog_ended
 	Globals.play_music(preload("res://music/sewers.ogg"))
-	player_node.can_move = true
+	player_node.is_playable = true
 
 
 func _on_WindowScene_body_entered(_body):
 	$WindowScene.set_deferred("monitoring", false)
-	player_node.can_move = false
+	player_node.is_playable = false
 	player_node.target_position = $WindowScene.position
 	await get_tree().create_timer(1.5).timeout
 
@@ -44,12 +44,12 @@ func _on_WindowScene_body_entered(_body):
 		{ "name": "Armonica", "portrait": "an_neutral", "text": "Well I hope not!" },
 		])
 	await Globals.dialog_system.dialog_ended
-	player_node.can_move = true
+	player_node.is_playable = true
 
 
 func _on_ElekScene_body_entered(_body):
 	$ElekScene.set_deferred("monitoring", false)
-	player_node.can_move = false
+	player_node.is_playable = false
 	player_node.target_position = $ElekScene.position
 	await get_tree().create_timer(1.0).timeout
 
@@ -60,4 +60,4 @@ func _on_ElekScene_body_entered(_body):
 		{ "name": "Super Note", "portrait": "sn_squint", "text": "Developer. You know what you need to do." },
 		])
 	await Globals.dialog_system.dialog_ended
-	player_node.can_move = true
+	player_node.is_playable = true

@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj2jqnia0se78"]
+
+[ext_resource type="Texture2D" uid="uid://qjnb35o3vcme" path="res://props/chests.png" id="1_82lym"]
+[ext_resource type="Script" path="res://props/interactable.gd" id="1_jil3n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ciajq"]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8o7wf"]
+radius = 16.0
+
+[node name="Interactable" type="Area2D"]
+z_as_relative = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jil3n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_82lym")
+offset = Vector2(0, -6)
+hframes = 2
+vframes = 2
+
+[node name="Collider" type="StaticBody2D" parent="."]
+
+[node name="Shape" type="CollisionShape2D" parent="Collider"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ciajq")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_8o7wf")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = -12.0
+text = "Do stuff"

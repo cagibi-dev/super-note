@@ -4,8 +4,7 @@ signal hurt
 signal done
 
 
-func _on_first_bullet_destroyed(pos: Vector2):
-	_on_bullet_destroyed(pos)
+func _ready():
 	spawn_bullets()
 
 
@@ -33,7 +32,7 @@ func _on_bullet_destroyed(pos: Vector2):
 	add_child(explosion)
 
 
-func _on_vibe_line_body_entered(bullet: PhysicsBody2D):
+func _on_bullet_avatar_hurt(bullet: PhysicsBody2D):
 	$Hurt.play()
 	shake_screen()
 	emit_signal("hurt")

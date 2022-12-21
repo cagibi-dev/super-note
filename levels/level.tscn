@@ -30,6 +30,7 @@ metadata/_edit_lock_ = true
 z_index = 10
 anchor_mode = 0
 current = true
+limit_bottom = 192
 editor_draw_limits = true
 metadata/_edit_lock_ = true
 

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dp5u3xmlxy7kj" path="res://characters/super_note.png" id="3"]
 [ext_resource type="AudioStream" uid="uid://uy08jnbyeyns" path="res://characters/wood_block_strike.wav" id="5"]
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_yn5j8"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,7 +32,7 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="6"]
+[sub_resource type="Animation" id="Animation_jy3wd"]
 resource_name = "choose"
 length = 0.6
 tracks/0/type = "value"
@@ -48,7 +48,7 @@ tracks/0/keys = {
 "values": [10, 11, 12, 13]
 }
 
-[sub_resource type="Animation" id="3"]
+[sub_resource type="Animation" id="Animation_huhd7"]
 resource_name = "idle"
 length = 0.8
 tracks/0/type = "value"
@@ -64,7 +64,7 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="5"]
+[sub_resource type="Animation" id="Animation_u8afk"]
 resource_name = "walk"
 length = 0.6
 step = 0.15
@@ -110,12 +110,12 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7n2so"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhba4"]
 _data = {
-"RESET": SubResource("2"),
-"choose": SubResource("6"),
-"idle": SubResource("3"),
-"walk": SubResource("5")
+"RESET": SubResource("Animation_yn5j8"),
+"choose": SubResource("Animation_jy3wd"),
+"idle": SubResource("Animation_huhd7"),
+"walk": SubResource("Animation_u8afk")
 }
 
 [node name="SuperNote" instance=ExtResource("1")]
@@ -150,5 +150,5 @@ color = Color(0, 0, 0, 1)
 
 [node name="Anim" parent="." index="7"]
 libraries = {
-"": SubResource("AnimationLibrary_7n2so")
+"": SubResource("AnimationLibrary_vhba4")
 }
